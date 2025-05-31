@@ -827,6 +827,7 @@ input:not(:placeholder-shown) ~ label {
     margin-top: 20px;
     width:60px;
     height:60px;
+    outline: none;
     border-width: 0px;
     background:#ad717100;
 }
@@ -857,6 +858,7 @@ input:not(:placeholder-shown) ~ label {
     right:20px;
     bottom:0px;
     border-width: 0px;
+    outline: none;
     background:#33040400;
     transition: 1s;
 }
