@@ -24,6 +24,7 @@ var controller = {"a" : false,
                 "w" : false,
                 "s" : false}; //for all inputs and keys
 
+var can_move=true;
 
 //multiplayer
 var profile_shown = {};
@@ -48,9 +49,15 @@ const pickerImageOpts = {
         excludeAcceptAllOption: true,
         multiple: false,
     };
+//chat message
+
+var input_chat;
+const max_caracters = 250;
+var text_dict={}
+var link_player_msg=[];
+
 
 //cookies XD
-
 function retrieveInfos() {
     id_password=cookie_get('id_password');
     if (!id_password) {
@@ -92,7 +99,8 @@ window.addEventListener("load", (event) => {
         setInterval(function(){multiplayer_get()},80);
         setInterval(function(){updatePosMultiplayer()},25);
         setInterval(function(){removeEmojis()},10000);
-        setInterval(function(){getEmojis()},500);
+        setInterval(function(){removeText()},10000);
+        setInterval(function(){getObjects()},500);
     }
     if ((document.getElementById("friend")) || (document.getElementById("stranger"))) {
         mail = cookie_get("mail");
@@ -120,6 +128,23 @@ window.addEventListener("keydown", (event) => {
 });
 window.addEventListener("keyup", (event) => {
     key_up_control(event);
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    input_chat = document.getElementById("chat_bar");
+    if (input_chat) {
+        input_chat.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+        input_chat.addEventListener("focus", (event) => {
+            can_move=false;
+        });
+        input_chat.addEventListener("blur", (event) => {
+            can_move=true;
+        });
+    }
 });
 
 function key_up_control(e) {
@@ -638,24 +663,25 @@ function submitRegister(event) {
 //PLAY PART
 
 function handleInput(){
-    list = [0,0,0,0];
-
-    for(var key in controller) {
-        var value = controller[key];
-        if (value==true) {
-            //we do smth
-            if (key == "a"){
-                list[0] = speed_x;
-            }if (key == "d"){
-                list[1] = speed_x;
-            }if (key == "w"){
-                list[2] = speed_y;
-            }if (key == "s"){
-                list[3] = speed_y;
+    if (can_move==true){
+        list = [0,0,0,0];
+        for(var key in controller) {
+            var value = controller[key];
+            if (value==true) {
+                //we do smth
+                if (key == "a"){
+                    list[0] = speed_x;
+                }if (key == "d"){
+                    list[1] = speed_x;
+                }if (key == "w"){
+                    list[2] = speed_y;
+                }if (key == "s"){
+                    list[3] = speed_y;
+                }
             }
         }
-    }
-    movePlayer(position_x-list[0]+list[1], position_y-list[2]+list[3]);
+        movePlayer(position_x-list[0]+list[1], position_y-list[2]+list[3]);
+    }    
 }
 
 function movePlayer(x, y){
@@ -671,6 +697,17 @@ function movePlayer(x, y){
         if (checkForOutOfBounds(x,y) == false) {
             position_x = x;
             position_y = y;
+        }
+    }
+    
+    /*Check if message player => then move it */
+    for (let elt in link_player_msg){
+        if (link_player_msg[elt][0] == mail){
+            let text = document.getElementById(link_player_msg[elt][1]);
+            if (text!=undefined){
+                text.style.left= (position_x).toString() + "px";
+                text.style.top= (position_y-30).toString() + "px";
+            }
         }
     }
 }
@@ -976,6 +1013,15 @@ function updatePosMultiplayer() {
         if (player!=undefined){
             player.style.left = (x).toString() + "px";
             player.style.top = (y).toString() + "px";
+            for (let _elt in link_player_msg){
+                if (link_player_msg[_elt][0] == n_mail){
+                    let text = document.getElementById(link_player_msg[_elt][1]);
+                    if (text != undefined){
+                        text.style.left= (x).toString() + "px";
+                        text.style.top= (y-30).toString() + "px";
+                    }
+                }
+            }
             
             const player_graphics = document.getElementById(n_mail.trim()+"_graphics");
             if (player_graphics != undefined && (x_dir !=0 || y_dir != 0)){
@@ -1054,9 +1100,9 @@ function addEmoji(nb) {
 }
 
 
-function getEmojis() {
+function getObjects() {
     //send to the server the emoji
-    fetch('http://localhost:5000/getEmojiList', {
+    fetch('http://localhost:5000/getObjectList', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -1066,17 +1112,24 @@ function getEmojis() {
     .then(response => response.json())
     .then(data => { 
         if (data.result != ""){
-            var all_emojis = data.result.split("|");
-            for (let emoji in all_emojis){
-                if (all_emojis[emoji] != ''){
-                    let emoji_infos = all_emojis[emoji].split(',');
-                    let code = emoji_infos[0];
-                    let date = emoji_infos[1];
-                    let x = emoji_infos[2];
-                    let y = emoji_infos[3];
-                    let is_img = emoji_infos[4];
-                    console.log(emoji_infos);
-                    showEmoji(code, date, is_img, x, y);
+            var all_elts = data.result.split("|");
+            for (let elt in all_elts){
+                if (all_elts[elt] != ''){
+                    let infos = all_elts[elt].split(',');
+                    if (infos[0] == 1 || infos[0] == "1"){
+                        let code = infos[1];
+                        let date = infos[2];
+                        let player_mail = infos[3];
+                        showText(code, date, player_mail);
+                    }
+                    else{
+                        let code = infos[1];
+                        let date = infos[2];
+                        let x = infos[3];
+                        let y = infos[4];
+                        let is_img = infos[5];
+                        showEmoji(code, date, is_img, x, y);
+                    }
                 }
             }
         }
@@ -1116,7 +1169,6 @@ function showEmoji(code, date, is_img=false, x=position_x, y=position_y) {
     }
 }
 
-
 function removeEmojis() {
     var emoji_to_keep = {};
     for (let elt in emoji_dict){
@@ -1132,6 +1184,7 @@ function removeEmojis() {
     }
     emoji_dict=emoji_to_keep;
 }
+
 
 //image part
 
@@ -1175,5 +1228,90 @@ async function publishImg() {
     } catch (err) {
         console.error("Upload failed:", err.message);
         alert("Imgur upload failed: " + err.message);
+    }
+}
+
+//Chat
+
+function sendMessage(){
+    var code = document.getElementById("chat_bar").value;
+    if (code.length >= max_caracters){
+        alert("Too much caracters, please shorten your sentence");
+    }
+    else{
+        showText(code, Date.now(), mail, show_abs=true);
+        //send to the server the emoji
+        fetch('http://localhost:5000/addTextList', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code:code, date:Date.now(), player_mail:mail})
+        })
+        .then(response => response.json())
+        .then(data => {
+            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+}
+
+function removeText() {
+    var text_to_keep = {};
+    for (let elt in text_dict){
+        if (Date.now()-elt>=3000+(document.getElementById(text_dict[elt]).innerHTML.length/(max_caracters*0.15))){
+            console.log(link_player_msg, text_dict[elt]);
+            for (let _elt in link_player_msg){
+                console.log(link_player_msg[_elt][1], text_dict[elt]);
+                if (link_player_msg[_elt][1] == text_dict[elt]){
+                    delete link_player_msg[_elt];
+                }
+            }
+            let code = document.getElementById(text_dict[elt]);
+            if (code) {
+                code.remove();
+            }
+        }
+        else{
+            text_to_keep[elt] = text_dict[elt];
+        }
+    }
+    text_dict=text_to_keep;
+}
+
+function showText(code, date, player_mail, show_abs=false) {
+    //replace code par une img
+    var not_in = true;
+    for (let elt in text_dict){
+        if (date == elt){
+            not_in=false;
+        }
+    }
+    if (not_in){
+        if (mail == player_mail){
+            if (show_abs){
+                document.getElementById("text_manager").insertAdjacentHTML('beforeend',"<div id='text_"+date+"' class='text_show' style='font-size:"+10*(((max_caracters)*0.04)/((code.length+1)*0.04))+"'>"+code+"</div>");
+                document.getElementById("text_"+date).style.position = "absolute";
+                document.getElementById("text_"+date).style.left = (position_x+3)+"px";
+                document.getElementById("text_"+date).style.top = (position_y-30).toString()+"px";
+                document.getElementById("text_"+date).style.animation = "text_fade "+((code.length/(max_caracters*0.15))+1.5).toString()+"s linear forwards";
+                
+                text_dict[date]=(["text_"+date]);
+                link_player_msg.push([mail, ("text_"+date).toString()])
+            }
+        }
+        else {
+            let player = document.getElementById(player_mail);
+            document.getElementById("text_manager").insertAdjacentHTML('beforeend',"<div id='text_"+date+"' class='text_show' style='font-size:"+10*(((max_caracters)*0.04)/((code.length+1)*0.04))+"'>"+code+"</div>");
+            document.getElementById("text_"+date).style.position = "absolute";
+            document.getElementById("text_"+date).style.left = (player.style.left+3)+"px";
+            document.getElementById("text_"+date).style.top = (player.style.top-30).toString()+"px";
+            document.getElementById("text_"+date).style.animation = "text_fade "+((code.length/(max_caracters*0.15))+1.5).toString()+"s linear forwards";
+            
+            text_dict[date]=(["text_"+date]);
+            link_player_msg.push([player_mail, ("text_"+date).toString()]);
+        }
     }
 }
