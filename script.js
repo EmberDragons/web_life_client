@@ -84,8 +84,6 @@ function updateColor(event) {
     }
 }
 window.addEventListener("load", (event) => {
-    getpeopleOnline();
-    getpeopleRegistered();
     setListServer();
     if (cookie_get('id_password') != undefined){
         retrieveInfos();
@@ -113,6 +111,8 @@ window.addEventListener("load", (event) => {
         mail = cookie_get("mail");
         GetProfile(mail);
     }
+    getpeopleOnline();
+    getpeopleRegistered();
 });
 
 
