@@ -26,6 +26,11 @@ var controller = {"a" : false,
 
 var can_move=true;
 
+//online
+var nb_people_online = 0;
+var nb_people_registered = 0;
+
+
 //multiplayer
 var profile_shown = {};
 var dict_people_serv = {};
@@ -79,6 +84,8 @@ function updateColor(event) {
     }
 }
 window.addEventListener("load", (event) => {
+    getpeopleOnline();
+    getpeopleRegistered();
     setListServer();
     if (cookie_get('id_password') != undefined){
         retrieveInfos();
@@ -152,6 +159,54 @@ function key_up_control(e) {
 }
 function key_down_control(e) {
     controller[e.key] = true;
+}
+
+//function for index set up
+
+function setNbConnected() {
+    let html_part = document.getElementById("number_connected");
+    if (html_part!=undefined){
+        html_part.innerHTML = nb_people_online;
+    }
+}
+
+function setNbRegistered() {
+    let html_part = document.getElementById("number_registered");
+    if (html_part!=undefined){
+        html_part.innerHTML = nb_people_registered;
+    }
+}
+
+
+function getpeopleOnline(){
+    fetch('http://localhost:5000/getNBPeopleOnline', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        //console.log(data.result);
+        nb_people_online=data.result;
+        setNbConnected();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function getpeopleRegistered(){
+    fetch('http://localhost:5000/getNBPeople', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        nb_people_registered=data.result;
+        setNbRegistered();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 function setColorCararcter() {
@@ -902,6 +957,8 @@ function check_ping_inside_database() {
         });
     }
 }
+
+//multiplayer part
 
 function multiplayer_get() {
     if (server_id != undefined){
