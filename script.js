@@ -75,8 +75,8 @@ const update = () => {
     handleInput();
     move_all_multiplayer();
 
-    if (currentFrameShort == shortFrame*FRAMERATE) GET_SHORT();
-    if (currentFrameLong == longFrame*FRAMERATE) GET_LONG();
+    if (currentFrameShort == Math.round(shortFrame*FRAMERATE)) GET_SHORT();
+    if (currentFrameLong == Math.round(longFrame*FRAMERATE)) GET_LONG();
 }
 
 const draw = () => {
