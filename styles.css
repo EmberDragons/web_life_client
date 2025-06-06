@@ -30,7 +30,6 @@
         opacity: 0%;
     }
 }
-
 @keyframes text_fade {
     0% {
         transform: translateY(0px);
@@ -45,6 +44,7 @@
         opacity: 0%;
     }
 }
+
 @keyframes zoom_button {
     0% {
         zoom: 100%;
@@ -814,7 +814,6 @@ input:not(:placeholder-shown) ~ label {
     opacity: 0.85;
 }
 
-
 .side_emojis_button {
     position: relative;              /* Fixed to viewport */
     font-size: 60px;
@@ -912,7 +911,6 @@ input:not(:placeholder-shown) ~ label {
     opacity:75%;
 }
 
-
 /*Chat css values*/
 .chat_bar {
     text-align: left;
@@ -973,6 +971,54 @@ input:not(:placeholder-shown) ~ label {
     height: 40px;           
     min-width: 30px;
     max-width: 80px;
+}
+
+.chat {
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 7px;
+    font-family: main_font;
+    font-size: 22px;
+    color: #bdbcbc;
+    z-index: 1001;
+    width: 300px;
+    height: 250px;
+    position: fixed;              /* Fixed to viewport */
+    
+    bottom: 120px;
+    left: 20px;                  /* Space from right edge */
+    background: linear-gradient(rgb(31, 37, 38), rgb(31, 37, 38));
+    border: 2px solid rgba(0, 0, 0, 0.922);
+    border-radius: 12px;
+    opacity: 0.55;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+/*cool scrollbar XD*/
+::-webkit-scrollbar {
+    width:10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #9f9797;
+    border-radius: 20px;
+}
+
+.chat p {
+    color:#bdbcbc;
+    margin: 10px -25px;
+}
+
+.log_name {
+    color:#ff0303;
+    font-style: bold;
+}
+
+.log_date {
+    font-size: 13px;
+    color:#a1a0a0ad;
+    font-style: italic;
 }
 
 header {
