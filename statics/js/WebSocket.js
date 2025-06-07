@@ -6,6 +6,10 @@ export class WebSocket {
             withCredentials: true,
             extraHeaders: {
                 "Access-Control-Allow-Origin": "access"
+            },
+            cors: {
+                origin: "https://web-life-client.vercel.app", // your frontend URL
+                credentials: true
             }
         });
         this.socket.emit('my event', {data: 'I\'m connected!'});
