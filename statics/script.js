@@ -89,7 +89,6 @@ const draw = () => {
 
 const GET_SHORT = () => {
     currentFrameShort=0;
-    console.log('here');
     webSocket.sendPos();
 
 
