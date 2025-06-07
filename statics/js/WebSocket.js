@@ -15,7 +15,7 @@ export class WebSocket {
         var list_server_nb;
         if (document.getElementById("set_list_server")) {
             this.socket.emit('serverPeople', { data : "none"}, function(response) {
-                list_server_nb = response.split(',');
+                list_server_nb = response['result'].split(',');
                 setPeopleShow();
             });
         }   
