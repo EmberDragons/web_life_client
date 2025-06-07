@@ -106,17 +106,18 @@ const GET_LONG = () => {
 //socket io code set up
 var playing = false;
 
-const webSocket = new WebSocket();
-webSocket.socket.on("position", function(data) {
-    let mail_pers = data["mail"];
-    let t_server_id = data["server_id"];
-    let pos_x = data["pos_x"];
-    let pos_y = data["pos_y"];
-    let name = data["name"];
-    let color = data["color"];
-    multiplayerCheck(t_server_id, mail_pers, name, pos_x, pos_y, color);
-});
-
+if ((document.getElementsByName("play").length)!=0){
+    const webSocket = new WebSocket();
+    webSocket.socket.on("position", function(data) {
+        let mail_pers = data["mail"];
+        let t_server_id = data["server_id"];
+        let pos_x = data["pos_x"];
+        let pos_y = data["pos_y"];
+        let name = data["name"];
+        let color = data["color"];
+        multiplayerCheck(t_server_id, mail_pers, name, pos_x, pos_y, color);
+    });
+}
 
 //actual lauched gameLoop
 const gameLoop = new GameLoop(update, draw);
