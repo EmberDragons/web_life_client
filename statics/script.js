@@ -349,7 +349,7 @@ function add_friend() {
     if (id_password!=undefined){
         let friend_mail = cookie_get('mail_seeing');
 
-        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.appaddFriend', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/addFriend', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
