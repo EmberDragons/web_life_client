@@ -53,6 +53,10 @@ export class WebSocket {
         });
     }
 
+    updatePos(dict) {
+        this.socket.emit('updatePos', dict);
+    }
+
     addEmoji(dict) {
         this.socket.emit('addEmojiList', dict);
     }

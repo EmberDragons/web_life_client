@@ -93,8 +93,7 @@ const GET_SHORT = () => {
     getAllServerPeople();
     getObjects();
     multiplayer_get();
-    /*
-    set_position_server();*/
+    set_position_server();
 }
 
 const GET_LONG = () => {
@@ -930,19 +929,7 @@ function communicate_get() {
 function set_position_server() {
     if (canSetPosDB){
         if (mail){
-            fetch('http://localhost:5000/updatePos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ mail : mail, server_id : server_id, pos_x:position_x, pos_y : position_y})
-            })
-            .then(response => response.json())
-            .then(data =>{
-                if (data.result == "not in data_base"){
-                    add_to_db()
-                }
-            });
+            webSocket.updatePos({mail: mail});
         }
     }
 }
