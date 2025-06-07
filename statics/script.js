@@ -5,7 +5,6 @@ var password_state = false;
 var max_server = 8;
 
 var infos;
-var list_server_nb;
 var max_people_server =30;
 
 var name_pseudo;
@@ -298,25 +297,16 @@ function setConnectedTrue(){
 function getAllServerPeople(){
     
     if (document.getElementById("set_list_server")) {
-        fetch('http://localhost:5000/serverPeople', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ max_server_id : max_server})
-        })
-        .then(response => response.json())
-        .then(data => {
-            list_server_nb = data.result.split(',');
-            setPeopleShow();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        let list = webSocket.getAllServerPeople();
+        if (list!=undefined || list!=null) {
+            setPeopleShow(list);
+        }
     }   
 }
 
-function setPeopleShow(){
+function setPeopleShow(list){
     for (let nb=0;nb<max_server;nb++){
-        document.getElementById('people_nb_'+(nb+1).toString()).innerHTML = list_server_nb[nb].toString()+'/'+max_people_server.toString();
+        document.getElementById('people_nb_'+(nb+1).toString()).innerHTML = list[nb].toString()+'/'+max_people_server.toString();
     }
 }
 

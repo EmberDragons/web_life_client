@@ -11,9 +11,14 @@ export class WebSocket {
         this.socket.emit('my event', {data: 'I\'m connected!'});
     }
     
-    sendPos() {
-        this.socket.emit('my event', {data: "1000"}, function(response) {
-            console.log("Server replied:", response);
-        });
+    getAllServerPeople() {
+        var list_server_nb;
+        if (document.getElementById("set_list_server")) {
+            this.socket.emit('serverPeople', { max_server_id : max_server}, function(response) {
+                list_server_nb = response.split(',');
+                setPeopleShow();
+            });
+        }   
+        return list_server_nb;
     }
 }
