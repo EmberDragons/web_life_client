@@ -243,13 +243,10 @@ function getpeopleOnline(){
                 "Access-Control-Allow-Origin": "access"}
     })
     .then(response => {
-        if (response.headers.get('content-type')?.includes('application/json')) {
-            return response.json();
-        } else {
-            return response.text().then(text => { throw new Error(text); });
-        }})
+        return response.json();
+    })
     .then(data => {
-        //console.log(data.result);
+        console.log(data.result);
         nb_people_online=data.result;
         setNbConnected();
     })
