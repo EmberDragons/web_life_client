@@ -30,7 +30,7 @@ export class WebSocket {
     getObjects() {
         return new Promise((resolve, reject) => {
             //send to the server the emoji
-            this.socket.emit('getObjectList', { data: "none" }, function(response) {
+            this.socket.emit('getObjectList', function(response) {
                 if (response && response['result']) {
                     resolve(response['result'].split("|"));
                 } else {
