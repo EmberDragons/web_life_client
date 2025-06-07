@@ -40,7 +40,7 @@ var canSetPosDB = false;
 
 var profile_shown = {};
 var dict_people_serv = {};
-const move_mult_speed = 4;
+const move_mult_speed = 2;
 
 //emojis
 var emoji_dict={}
