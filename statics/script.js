@@ -106,18 +106,17 @@ const GET_LONG = () => {
 //socket io code set up
 var playing = false;
 
-if ((document.getElementsByName("play").length)!=0){
-    const webSocket = new WebSocket();
-    webSocket.socket.on("position", function(data) {
-        let mail_pers = data["mail"];
-        let t_server_id = data["server_id"];
-        let pos_x = data["pos_x"];
-        let pos_y = data["pos_y"];
-        let name = data["name"];
-        let color = data["color"];
-        multiplayerCheck(t_server_id, mail_pers, name, pos_x, pos_y, color);
-    });
-}
+const webSocket = new WebSocket();
+webSocket.socket.on("position", function(data) {
+    let mail_pers = data["mail"];
+    let t_server_id = data["server_id"];
+    let pos_x = data["pos_x"];
+    let pos_y = data["pos_y"];
+    let name = data["name"];
+    let color = data["color"];
+    multiplayerCheck(t_server_id, mail_pers, name, pos_x, pos_y, color);
+});
+
 
 //actual lauched gameLoop
 const gameLoop = new GameLoop(update, draw);
@@ -240,7 +239,8 @@ function setNbRegistered() {
 function getpeopleOnline(){
     fetch('http://localhost:5000/getNBPeopleOnline', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' , 
+                "Access-Control-Allow-Origin": "access"}
     })
     .then(response => response.json())
     .then(data => {
@@ -256,7 +256,8 @@ function getpeopleOnline(){
 function getpeopleRegistered(){
     fetch('http://localhost:5000/getNBPeople', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' ,
+                "Access-Control-Allow-Origin": "access"}
     })
     .then(response => response.json())
     .then(data => {
@@ -290,7 +291,8 @@ function setListServer() {
 function setConnectedTrue(){
     fetch('http://localhost:5000/updateOnlineTrue', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' ,
+                "Access-Control-Allow-Origin": "access"},
         body: JSON.stringify({ id_password : id_password})
     })
     .then(response => response.json())
@@ -325,7 +327,8 @@ function joinServer(server_id){
     if (id_password != null){
         fetch('http://localhost:5000/changeServer', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' ,
+                "Access-Control-Allow-Origin": "access"},
             body: JSON.stringify({ server_id: server_id,  id_password : id_password, mail:mail})
         })
         .then(response => response.json())
@@ -353,7 +356,8 @@ function add_friend() {
             mode: 'cors',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({ mail : friend_mail, id_password : id_password})
         })
@@ -379,7 +383,8 @@ function remove_friend() {
             mode: 'cors',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({ mail : friend_mail, id_password : id_password})
         })
@@ -414,7 +419,8 @@ function is_friend(mail) {
     return fetch('http://localhost:5000/isFriend', {
         method: 'POST',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json' ,
+                "Access-Control-Allow-Origin": "access"},
         body: JSON.stringify({ mail : mail, id_password : id_password })
     })
     .then(response => response.json())
@@ -466,7 +472,8 @@ function GetProfile(mail) {
         mode: 'cors',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "access"
         },
         body: JSON.stringify({mail:mail})
     })
@@ -560,7 +567,8 @@ function setProfileShow() {
             mode: 'cors',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({ name : p_name, password : pass, color : col, banner_color : banner_col, id : id_password})
         })
@@ -621,7 +629,8 @@ function sendMail(event){
     else{
         fetch('http://localhost:5000/changePasswordRequest', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' ,
+                "Access-Control-Allow-Origin": "access"},
             body: JSON.stringify({ email: email })
         })
         .then(response => response.json())
@@ -672,7 +681,8 @@ function log_in(mail, password){
     fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "access"
         },
         body: JSON.stringify({ mail : mail, password : password})
     })
@@ -709,7 +719,8 @@ function setNewPassword(event){
     fetch('http://localhost:5000/changePassword', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "access"
         },
         body: JSON.stringify({ mail : mail, new_password : new_password, id_password : id_password})
     })
@@ -745,7 +756,8 @@ function submitRegister(event) {
     fetch('http://localhost:5000/register', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "access"
         },
         body: JSON.stringify({name : name, mail : mail, password : password})
     })
@@ -876,7 +888,8 @@ function communicate_get() {
         fetch('http://localhost:5000/communicate', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({ id : id_password})
         })
@@ -920,7 +933,8 @@ function add_to_db() {
         fetch('http://localhost:5000/addToList', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({ mail:mail, name:name_pseudo, server_id:server_id, color:color})
         })
@@ -937,7 +951,8 @@ function check_ping() {
         fetch('http://localhost:5000/ping', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({server_id:server_id})
         })
@@ -956,7 +971,8 @@ function check_ping_inside_database() {
         fetch('http://localhost:5000/pingInsideDatabase', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "access"
             },
             body: JSON.stringify({mail:mail})
         })
@@ -1226,6 +1242,7 @@ async function publishImg() {
             method: "POST",
             headers: {
                 Authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
+                "Access-Control-Allow-Origin": "access"
             },
             body: formData
         });
