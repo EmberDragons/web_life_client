@@ -10,9 +10,7 @@ export class WebSocket {
         });
         console.log(this.socket);
         this.socket.emit('my event', {data: 'I\'m connected!'});
-        this.socket.on('connect', function() {
-            this.socket.emit('my event', {data: 'I\'m connected!'});
-        });
+        
     }
     
     sendPos() {
