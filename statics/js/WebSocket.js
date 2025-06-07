@@ -4,13 +4,7 @@ export class WebSocket {
     constructor() {
         this.socket = io(SERVER_ADRESS, {
             withCredentials: true,
-            extraHeaders: {
-                "Access-Control-Allow-Origin": "access"
-            },
-            cors: {
-                origin: "https://web-life-client.vercel.app", // your frontend URL
-                credentials: true
-            }
+            transports: ["websocket", "polling"]
         });
         this.socket.emit('my event', {data: 'I\'m connected!'});
     }

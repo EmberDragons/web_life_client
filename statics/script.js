@@ -241,8 +241,7 @@ function setNbRegistered() {
 function getpeopleOnline(){
     fetch(SERVER_ADRESS+'/getNBPeopleOnline', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' , 
-                "Access-Control-Allow-Origin": "access"}
+        headers: { 'Content-Type': 'application/json'}
     })
     .then(response => {
         return response.json();
@@ -261,7 +260,7 @@ function getpeopleRegistered(){
     fetch(SERVER_ADRESS+'/getNBPeople', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' ,
-                "Access-Control-Allow-Origin": "access"}
+                }
     })
     .then(response => response.json())
     .then(data => {
@@ -296,7 +295,7 @@ function setConnectedTrue(){
     fetch(SERVER_ADRESS+'/updateOnlineTrue', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' ,
-                "Access-Control-Allow-Origin": "access"},
+                },
         body: JSON.stringify({ id_password : id_password})
     })
     .then(response => response.json())
@@ -330,7 +329,7 @@ function joinServer(server_id){
         fetch(SERVER_ADRESS+'/changeServer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' ,
-                "Access-Control-Allow-Origin": "access"},
+                },
             body: JSON.stringify({ server_id: server_id,  id_password : id_password, mail:mail})
         })
         .then(response => response.json())
@@ -359,7 +358,7 @@ function add_friend() {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({ mail : friend_mail, id_password : id_password})
         })
@@ -386,7 +385,7 @@ function remove_friend() {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({ mail : friend_mail, id_password : id_password})
         })
@@ -422,7 +421,7 @@ function is_friend(mail) {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' ,
-                "Access-Control-Allow-Origin": "access"},
+                },
         body: JSON.stringify({ mail : mail, id_password : id_password })
     })
     .then(response => response.json())
@@ -476,7 +475,7 @@ function GetProfile(mail) {
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "access"
+            
         },
         body: JSON.stringify({mail:mail})
     })
@@ -571,7 +570,7 @@ function setProfileShow() {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({ name : p_name, password : pass, color : col, banner_color : banner_col, id : id_password})
         })
@@ -633,7 +632,7 @@ function sendMail(event){
         fetch(SERVER_ADRESS+'/changePasswordRequest', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' ,
-                "Access-Control-Allow-Origin": "access"},
+                },
             body: JSON.stringify({ email: email })
         })
         .then(response => response.json())
@@ -685,7 +684,7 @@ function log_in(mail, password){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "access"
+            
         },
         body: JSON.stringify({ mail : mail, password : password})
     })
@@ -723,7 +722,7 @@ function setNewPassword(event){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "access"
+            
         },
         body: JSON.stringify({ mail : mail, new_password : new_password, id_password : id_password})
     })
@@ -760,7 +759,7 @@ function submitRegister(event) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "access"
+            
         },
         body: JSON.stringify({name : name, mail : mail, password : password})
     })
@@ -892,7 +891,7 @@ function communicate_get() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({ id : id_password})
         })
@@ -937,7 +936,7 @@ function add_to_db() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({ mail:mail, name:name_pseudo, server_id:server_id, color:color})
         })
@@ -955,7 +954,7 @@ function check_ping() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({server_id:server_id})
         })
@@ -975,7 +974,7 @@ function check_ping_inside_database() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "access"
+                
             },
             body: JSON.stringify({mail:mail})
         })
