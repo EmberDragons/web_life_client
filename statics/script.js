@@ -296,7 +296,7 @@ function getAllServerPeople(){
     
     if (document.getElementById("set_list_server")) {
         let list = webSocket.getAllServerPeople();
-        if (list!=undefined || list!=null) {
+        if (list!=null) {
             setPeopleShow(list);
         }
     }   

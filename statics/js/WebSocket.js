@@ -12,12 +12,12 @@ export class WebSocket {
     }
     
     getAllServerPeople() {
-        var list_server_nb;
+        var list_server_nb = null;
         if (document.getElementById("set_list_server")) {
             this.socket.emit('serverPeople', { data : "none"}, function(response) {
                 list_server_nb = response['result'].split(',');
+                return list_server_nb;
             });
         }   
-        return list_server_nb;
     }
 }
