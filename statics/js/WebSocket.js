@@ -39,4 +39,8 @@ export class WebSocket {
             });
         });
     }
+
+    addEmoji(dict) {
+        this.socket.emit('addEmojiList', dict);
+    }
 }

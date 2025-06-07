@@ -1157,20 +1157,8 @@ function addEmoji(nb) {
             var code = document.getElementById(nb).innerHTML;
             showEmoji(code, Date.now(), false);
             //send to the server the emoji
-            fetch('http://localhost:5000/addEmojiList', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ code:code, date:wait_next_date, pos_x:position_x, pos_y:position_y, is_img:false})
-            })
-            .then(response => response.json())
-            .then(data => {
-                
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            
+            webSocket.addEmoji({code : code, date:wait_next_date, pos_x:position_x, pos_y:position_y, is_img:false});
         }
         else {
             if (imgName!=undefined){
@@ -1178,20 +1166,7 @@ function addEmoji(nb) {
                 var link = imgName;
                 showEmoji(link, Date.now(), true);
                 //send to the server the emoji
-                fetch('http://localhost:5000/addEmojiList', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ code : link, date:wait_next_date, pos_x:position_x, pos_y:position_y, is_img:true})
-                })
-                .then(response => response.json())
-                .then(data => {
-                    
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                webSocket.addEmoji({code : link, date:wait_next_date, pos_x:position_x, pos_y:position_y, is_img:true});
             }
         }
     }
