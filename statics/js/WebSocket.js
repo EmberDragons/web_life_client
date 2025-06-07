@@ -10,13 +10,13 @@ export class WebSocket {
         });
 
         
-        socket.on('connect', function() {
-            socket.emit('my event', {data: 'I\'m connected!'});
+        this.socket.on('connect', function() {
+            this.socket.emit('my event', {data: 'I\'m connected!'});
         });
     }
     
     sendPos() {
-        socket.emit('my event', {data: "1000"}, function(response) {
+        this.socket.emit('my event', {data: "1000"}, function(response) {
             console.log("Server replied:", response);
         });
     }
