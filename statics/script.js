@@ -114,7 +114,7 @@ const GET_LONG = () => {
 const gameLoop = new GameLoop(update, draw);
 const webSocket = new WebSocket();
 
-const shortFrame = 2; //time in sec to wait for new short call
+const shortFrame = 0.5; //time in sec to wait for new short call
 const longFrame = 10; //time in sec to wait for new long call
 
 var currentFrameShort=0;
