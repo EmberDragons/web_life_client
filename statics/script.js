@@ -242,7 +242,12 @@ function getpeopleOnline(){
         headers: { 'Content-Type': 'application/json' , 
                 "Access-Control-Allow-Origin": "access"}
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.headers.get('content-type')?.includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text().then(text => { throw new Error(text); });
+        }})
     .then(data => {
         //console.log(data.result);
         nb_people_online=data.result;
