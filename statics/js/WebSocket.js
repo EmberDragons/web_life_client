@@ -1,4 +1,4 @@
-const SERVER_ADRESS = 'https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app';
+import { SERVER_ADRESS } from "../script";
 
 export class WebSocket {
     constructor() {
