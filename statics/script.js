@@ -1,7 +1,7 @@
 import { FRAMERATE, GameLoop } from './js/GameLoop.js';
 import { WebSocket } from './js/WebSocket.js';
 
-export const SERVER_ADRESS = 'http://127.0.0.1:5000/';
+export const SERVER_ADRESS = 'http://127.0.0.1:5000';
 
 var password_state = false;
 var max_server = 8;
