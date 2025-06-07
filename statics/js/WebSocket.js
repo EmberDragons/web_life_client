@@ -13,17 +13,30 @@ export class WebSocket {
     
     getAllServerPeople() {
         return new Promise((resolve, reject) => {
-        if (document.getElementById("set_list_server")) {
-            this.socket.emit('serverPeople', { data: "none" }, function(response) {
+            if (document.getElementById("set_list_server")) {
+                this.socket.emit('serverPeople', { data: "none" }, function(response) {
+                    if (response && response['result']) {
+                        resolve(response['result'].split(','));
+                    } else {
+                        reject('No response');
+                    }
+                });
+            } else {
+                resolve(null);
+            }
+        });
+    }
+
+    getObjects() {
+        return new Promise((resolve, reject) => {
+            //send to the server the emoji
+            this.socket.emit('getObjectList', { data: "none" }, function(response) {
                 if (response && response['result']) {
-                    resolve(response['result'].split(','));
+                    resolve(response['result'].split("|"));
                 } else {
                     reject('No response');
                 }
             });
-        } else {
-            resolve(null);
-        }
-    });
+        });
     }
 }

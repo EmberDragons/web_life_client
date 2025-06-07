@@ -91,8 +91,8 @@ const GET_SHORT = () => {
 
 
     getAllServerPeople();
-    /*
     getObjects();
+    /*
     multiplayer_get();
     set_position_server();*/
 }
@@ -293,7 +293,6 @@ function setConnectedTrue(){
 }
 
 function getAllServerPeople(){
-    
     if (document.getElementById("set_list_server")) {
         webSocket.getAllServerPeople().then(list => {
             if (list!=null) {
@@ -1200,44 +1199,35 @@ function addEmoji(nb) {
 
 
 function getObjects() {
-    //send to the server the emoji
-    fetch('http://localhost:5000/getObjectList', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-    })
-    .then(response => response.json())
-    .then(data => { 
-        if (data.result != ""){
-            var all_elts = data.result.split("|");
-            for (let elt in all_elts){
-                if (all_elts[elt] != ''){
-                    let infos = all_elts[elt].split(',');
-                    if (infos[0] == 1 || infos[0] == "1"){
-                        let code = infos[1];
-                        let date = infos[2];
-                        let player_mail = infos[3];
-                        let player_name = infos[4];
-                        logText(code, date, player_mail, player_name);
-                        showText(code, date, player_mail);
-                    }
-                    else{
-                        let code = infos[1];
-                        let date = infos[2];
-                        let x = infos[3];
-                        let y = infos[4];
-                        let is_img = infos[5];
-                        showEmoji(code, date, is_img, x, y);
-                    }
-                }
+    webSocket.getObjects().then(list => {
+        if (list!=null) {
+            showObjects(list);
+        }
+    });
+}
+
+function showObjects(all_elts) {
+    for (let elt in all_elts){
+        if (all_elts[elt] != ''){
+            let infos = all_elts[elt].split(',');
+            if (infos[0] == 1 || infos[0] == "1"){
+                let code = infos[1];
+                let date = infos[2];
+                let player_mail = infos[3];
+                let player_name = infos[4];
+                logText(code, date, player_mail, player_name);
+                showText(code, date, player_mail);
+            }
+            else{
+                let code = infos[1];
+                let date = infos[2];
+                let x = infos[3];
+                let y = infos[4];
+                let is_img = infos[5];
+                showEmoji(code, date, is_img, x, y);
             }
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    }
 }
 
 function showEmoji(code, date, is_img=false, x=position_x, y=position_y) {
