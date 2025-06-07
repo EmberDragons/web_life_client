@@ -929,7 +929,7 @@ function communicate_get() {
 function set_position_server() {
     if (canSetPosDB){
         if (mail){
-            webSocket.updatePos({mail: mail});
+            webSocket.updatePos({mail: mail, server_id: server_id, pos_x: position_x, pos_y: position_y});
         }
     }
 }
@@ -1285,20 +1285,7 @@ function sendMessage(){
     else{
         showText(code, Date.now(), mail, true);
         //send to the server the emoji
-        fetch('http://localhost:5000/addTextList', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ code:code, date:Date.now(), player_mail:mail, player_name:name_pseudo})
-        })
-        .then(response => response.json())
-        .then(data => {
-            
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        webSocket.addText({code:code, date:Date.now(), player_mail:mail, player_name:name_pseudo});
     }
     document.getElementById("chat_bar").value="";
 }

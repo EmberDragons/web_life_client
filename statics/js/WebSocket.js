@@ -60,4 +60,7 @@ export class WebSocket {
     addEmoji(dict) {
         this.socket.emit('addEmojiList', dict);
     }
+    addText(dict) {
+        this.socket.emit('addTextList', dict);
+    }
 }
