@@ -8,7 +8,7 @@ export class WebSocket {
                 "Access-Control-Allow-Origin": "access"
             }
         });
-        console.log(this.socket);
+        this.socket.emit('my event', {data: 'I\'m connected!'});
         this.socket.emit('my event', {data: 'I\'m connected!'});
         
     }
