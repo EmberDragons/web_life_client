@@ -303,6 +303,7 @@ function getAllServerPeople(){
 }
 
 function setPeopleShow(list){
+    console.log(list, max_server);
     for (let nb=0;nb<max_server;nb++){
         document.getElementById('people_nb_'+(nb+1).toString()).innerHTML = list[nb].toString()+'/'+max_people_server.toString();
     }
