@@ -153,8 +153,6 @@ window.addEventListener("load", (event) => {
     }
     if (id_password != undefined){
         setConnectedTrue();
-    }
-    if(document.getElementsByName("play").length!=0){
         gameLoop.start();
     }
     if ((document.getElementById("friend")) || (document.getElementById("stranger"))) {
