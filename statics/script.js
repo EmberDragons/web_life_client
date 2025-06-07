@@ -165,7 +165,7 @@ window.addEventListener("load", (event) => {
         playing=true;
     }
     if ((document.getElementById("friend")) || (document.getElementById("stranger"))) {
-        mail = cookie_get("mail");
+        mail = cookie_get("mail_seeing");
         GetProfile(mail);
     }
     getpeopleOnline();
@@ -349,7 +349,7 @@ function joinServer(server_id){
 //friends
 function add_friend() {
     if (id_password!=undefined){
-        friend_mail = cookie_get('mail');
+        friend_mail = cookie_get('mail_seeing');
 
         fetch('http://localhost:5000/addFriend', {
             method: 'POST',
@@ -376,7 +376,7 @@ function add_friend() {
 }
 function remove_friend() {
     if (id_password!=undefined){
-        friend_mail = cookie_get('mail');
+        friend_mail = cookie_get('mail_seeing');
 
         fetch('http://localhost:5000/removeFriend', {
             method: 'POST',
