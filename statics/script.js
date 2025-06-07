@@ -1245,8 +1245,7 @@ async function publishImg() {
         const res = await fetch("https://api.imgur.com/3/image", {
             method: "POST",
             headers: {
-                Authorization: `Client-ID ${IMGUR_CLIENT_ID}`,
-                "Access-Control-Allow-Origin": "access"
+                Authorization: `Client-ID ${IMGUR_CLIENT_ID}`
             },
             body: formData
         });
