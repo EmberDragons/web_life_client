@@ -92,7 +92,6 @@ const GET_SHORT = () => {
 
     getAllServerPeople();
     getObjects();
-    multiplayer_get();
     set_position_server();
 }
 
@@ -106,13 +105,20 @@ const GET_LONG = () => {
 
 //socket io code set up
 
-
-
+const webSocket = new WebSocket();
+webSocket.socket.on("position", function(data) {
+    let mail_pers = data["mail"];
+    let t_server_id = data["server_id"];
+    let pos_x = data["pos_x"];
+    let pos_y = data["pos_y"];
+    let name = data["name"];
+    let color = data["color"];
+    multiplayerCheck(t_server_id, mail_pers, name, pos_x, pos_y, color);
+});
 
 
 //actual lauched gameLoop
 const gameLoop = new GameLoop(update, draw);
-const webSocket = new WebSocket();
 
 const shortFrame = 0.3; //time in sec to wait for new short call
 const longFrame = 10; //time in sec to wait for new long call
@@ -805,32 +811,6 @@ function movePlayer(x, y){
         }
     }
 }
-/*
-function speedModifier() {
-    if ((controller["a"] == true || controller["d"] == true) && speed_x<max_speed){
-        speed_x*=acc;
-    }
-    if ((controller["s"] == true || controller["w"] == true) && speed_y<max_speed){
-        speed_y*=acc;
-    }
-    if (controller["a"] == false && controller["d"] == false && speed_x>norm_speed){
-        speed_x*=friction;
-        if (last_keys_axis["horizontal"] == "a"){
-            console.log(speed_x)
-            movePlayer(position_x+speed_x, position_y);
-        }if (last_keys_axis["horizontal"] == "d"){
-            movePlayer(position_x-speed_x, position_y);
-    }
-    if (controller["a"] == false && controller["d"] == false && speed_y>norm_speed){
-        speed_y*=friction;
-        }if (last_keys_axis["vertical"] == "s"){
-            movePlayer(position_x, position_y-speed_y);
-        }if (last_keys_axis["vertical"] == "w"){
-            movePlayer(position_x, position_y+speed_y);
-        }
-    }
-}*/
-
 function updatePosPlayer() {
     const player = document.getElementById("player");
     const player_graphics = document.getElementById("player_graphics");
@@ -926,13 +906,7 @@ function communicate_get() {
 
 //MULTIPLAYER communication
 
-function set_position_server() {
-    if (canSetPosDB){
-        if (mail){
-            webSocket.updatePos({mail: mail, server_id: server_id, pos_x: position_x, pos_y: position_y});
-        }
-    }
-}
+
 
 function add_to_db() {
     if (mail){
@@ -988,41 +962,25 @@ function check_ping_inside_database() {
 }
 
 //multiplayer part
-
-function multiplayer_get() {
-    if (server_id != undefined){
-        //send to the database the id_password
-        webSocket.multiplayer({server_id: server_id}).then(list => {
-            if (list!=null) {
-                multiplayerCheck(list);
-            }
-        });
+function set_position_server() {
+    if (canSetPosDB){
+        if (mail){
+            webSocket.updatePos({mail: mail, server_id: server_id, pos_x: position_x, pos_y: position_y, name: name_pseudo, color: color});
+        }
     }
 }
 
-function multiplayerCheck(all_data) {
-    console.log(all_data);
-    for (let string in all_data){
-        let str_res = all_data[string].replace('(','').replace(')','').replace("'",'');
-        let mult_infos=str_res.split(",");
-        let mail_pers = mult_infos[0].toString().trim();
-        let name_pers = mult_infos[1];
-        let color_pers = mult_infos[2];
-        let position_x_pers = parseFloat(mult_infos[3]);
-        let position_y_pers = parseFloat(mult_infos[4]);
-
-        if (mail_pers != mail.trim() && mail_pers!=""){
-            console.log(mail_pers,dict_people_serv);
-            if (!(mail_pers in dict_people_serv)){
-                add_multiplayer(mail_pers, name_pers, color_pers);
-            }
-            else{
-                let posi_x = dict_people_serv[mail_pers].pos_x;
-                let posi_y = dict_people_serv[mail_pers].pos_y;
-                let infos_pers = {"name":name_pers, "color":color_pers, "target_pos_x" : position_x_pers, "target_pos_y" : position_y_pers, "pos_x":posi_x, "pos_y":posi_y, "time":0};
-                
-                dict_people_serv[mail_pers] = infos_pers;
-            }
+function multiplayerCheck(t_server_id, mail_pers, name_pers, position_x_pers, position_y_pers, color_pers) {
+    if (t_server_id == server_id && mail_pers != mail.trim() && mail_pers!=""){
+        if (!(mail_pers in dict_people_serv)){
+            add_multiplayer(mail_pers, name_pers, color_pers);
+        }
+        else{
+            let posi_x = dict_people_serv[mail_pers].pos_x;
+            let posi_y = dict_people_serv[mail_pers].pos_y;
+            let infos_pers = {"name":name_pers, "color":color_pers, "target_pos_x" : position_x_pers, "target_pos_y" : position_y_pers, "pos_x":posi_x, "pos_y":posi_y, "time":0};
+            
+            dict_people_serv[mail_pers] = infos_pers;
         }
     }
 }

@@ -40,19 +40,6 @@ export class WebSocket {
         });
     }
 
-    multiplayer(dict) {
-        return new Promise((resolve, reject) => {
-            //send to the server the emoji
-            this.socket.emit('multiplayer', dict, function(response) {
-                if (response && response['result'] && response['result'] != "Error-server_id incorrect") {
-                    resolve(response['result'].split("|"));
-                } else {
-                    reject('No response');
-                }
-            });
-        });
-    }
-
     updatePos(dict) {
         this.socket.emit('updatePos', dict);
     }
