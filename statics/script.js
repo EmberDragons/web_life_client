@@ -1,4 +1,5 @@
 import { FRAMERATE, GameLoop } from './js/GameLoop.js';
+import { WebSocket } from './js/WebSocket.js';
 
 var password_state = false;
 var max_server = 8;
@@ -88,10 +89,14 @@ const draw = () => {
 
 const GET_SHORT = () => {
     currentFrameShort=0;
+
+    webSocket.sendPos();
+
+
     getAllServerPeople();
     getObjects();
     multiplayer_get();
-    set_position_db();
+    set_position_server();
 }
 
 const GET_LONG = () => {
@@ -102,8 +107,15 @@ const GET_LONG = () => {
     removeEmojis();
 }
 
+//socket io code set up
+
+
+
+
+
 //actual lauched gameLoop
 const gameLoop = new GameLoop(update, draw);
+const webSocket = WebSocket();
 
 const shortFrame = 2; //time in sec to wait for new short call
 const longFrame = 10; //time in sec to wait for new long call
@@ -927,7 +939,7 @@ function communicate_get() {
 
 //MULTIPLAYER communication
 
-function set_position_db() {
+function set_position_server() {
     if (canSetPosDB){
         if (mail){
             fetch('http://localhost:5000/updatePos', {
