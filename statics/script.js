@@ -88,7 +88,6 @@ const draw = () => {
 
 const GET_SHORT = () => {
     currentFrameShort=0;
-    webSocket.sendPos();
 
 
     getAllServerPeople();
