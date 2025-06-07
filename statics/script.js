@@ -176,11 +176,11 @@ window.addEventListener("load", (event) => {
 window.addEventListener("beforeunload", (event) => {
     gameLoop.stop();
     if (id_password != undefined) {
-        const url = 'http://localhost:5000/updateOnlineFalse';
+        const url = 'https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/updateOnlineFalse';
         const data = JSON.stringify({ id_password: id_password });
         navigator.sendBeacon(url, data);
         
-        const url2 = 'http://localhost:5000/removeToList';
+        const url2 = 'https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/removeToList';
         const data2 = JSON.stringify({ mail:mail});
         navigator.sendBeacon(url2, data2);
     }
@@ -237,7 +237,7 @@ function setNbRegistered() {
 
 
 function getpeopleOnline(){
-    fetch('http://localhost:5000/getNBPeopleOnline', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/getNBPeopleOnline', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' , 
                 "Access-Control-Allow-Origin": "access"}
@@ -254,7 +254,7 @@ function getpeopleOnline(){
 }
 
 function getpeopleRegistered(){
-    fetch('http://localhost:5000/getNBPeople', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/getNBPeople', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' ,
                 "Access-Control-Allow-Origin": "access"}
@@ -289,7 +289,7 @@ function setListServer() {
 }
 
 function setConnectedTrue(){
-    fetch('http://localhost:5000/updateOnlineTrue', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/updateOnlineTrue', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' ,
                 "Access-Control-Allow-Origin": "access"},
@@ -323,7 +323,7 @@ function setPeopleShow(list){
 
 function joinServer(server_id){
     if (id_password != null){
-        fetch('http://localhost:5000/changeServer', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/changeServer', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' ,
                 "Access-Control-Allow-Origin": "access"},
@@ -349,7 +349,7 @@ function add_friend() {
     if (id_password!=undefined){
         let friend_mail = cookie_get('mail_seeing');
 
-        fetch('http://localhost:5000/addFriend', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.appaddFriend', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -376,7 +376,7 @@ function remove_friend() {
     if (id_password!=undefined){
         let friend_mail = cookie_get('mail_seeing');
 
-        fetch('http://localhost:5000/removeFriend', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/removeFriend', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -414,7 +414,7 @@ function see_profile(pers_mail) {
 }
 
 function is_friend(mail) {
-    return fetch('http://localhost:5000/isFriend', {
+    return fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/isFriend', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' ,
@@ -466,7 +466,7 @@ function cookie_get(param){
 }
 
 function GetProfile(mail) {
-    fetch('http://localhost:5000/getProfile', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/getProfile', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
@@ -561,7 +561,7 @@ function setProfileShow() {
 
         //set the new name and password
         //send to the database the mail and password to check if it connects
-        fetch('http://localhost:5000/updateProfile', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/updateProfile', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -626,7 +626,7 @@ function sendMail(event){
         alert("Please enter an email");
     }
     else{
-        fetch('http://localhost:5000/changePasswordRequest', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/changePasswordRequest', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' ,
                 "Access-Control-Allow-Origin": "access"},
@@ -677,7 +677,7 @@ function submitLogin(event) {
 }
 
 function log_in(mail, password){
-    fetch('http://localhost:5000/login', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -715,7 +715,7 @@ function setNewPassword(event){
     event.preventDefault();
     let id_password = window.location.search.substring(1).replace("id_password=","");
     let new_password = document.getElementById('password_input').value;
-    fetch('http://localhost:5000/changePassword', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/changePassword', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -752,7 +752,7 @@ function submitRegister(event) {
 
 
     //send to the database the mail and password to check if it connects
-    fetch('http://localhost:5000/register', {
+    fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -884,7 +884,7 @@ function checkForOutOfBounds(pos_x, pos_y) {
 function communicate_get() {
     if (id_password != undefined){
         //send to the database the id_password
-        fetch('http://localhost:5000/communicate', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/communicate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -929,7 +929,7 @@ function communicate_get() {
 
 function add_to_db() {
     if (mail){
-        fetch('http://localhost:5000/addToList', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/addToList', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -947,7 +947,7 @@ function check_ping() {
     var past_time = Date.now();
     var time_elapsed = 0.0;
     if (server_id){
-        fetch('http://localhost:5000/ping', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/ping', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -967,7 +967,7 @@ function check_ping_inside_database() {
     var past_time = Date.now();
     var time_elapsed = 0.0;
     if (mail){
-        fetch('http://localhost:5000/pingInsideDatabase', {
+        fetch('https://5c40-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app/pingInsideDatabase', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
