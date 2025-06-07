@@ -1,7 +1,7 @@
 import { FRAMERATE, GameLoop } from './js/GameLoop.js';
 import { WebSocket } from './js/WebSocket.js';
 
-export const SERVER_ADRESS = 'https://3215-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app';
+export const SERVER_ADRESS = 'https://5718-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app';
 
 var password_state = false;
 var max_server = 8;
