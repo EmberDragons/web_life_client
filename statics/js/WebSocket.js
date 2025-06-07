@@ -9,8 +9,6 @@ export class WebSocket {
             }
         });
         this.socket.emit('my event', {data: 'I\'m connected!'});
-        this.socket.emit('my event', {data: 'I\'m connected!'});
-        
     }
     
     sendPos() {
