@@ -1014,6 +1014,7 @@ function multiplayer_get() {
 }
 
 function multiplayerCheck(all_data) {
+    console.log(all_data);
     for (let string in all_data){
         let str_res = all_data[string].replace('(','').replace(')','').replace("'",'');
         let mult_infos=str_res.split(",");
