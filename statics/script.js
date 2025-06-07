@@ -104,6 +104,7 @@ const GET_LONG = () => {
 }
 
 //socket io code set up
+var playing = false;
 
 const webSocket = new WebSocket();
 webSocket.socket.on("position", function(data) {
@@ -159,6 +160,9 @@ window.addEventListener("load", (event) => {
     if (id_password != undefined){
         setConnectedTrue();
         gameLoop.start();
+    }
+    if ((document.getElementsByName("play").length)!=0){
+        playing=true;
     }
     if ((document.getElementById("friend")) || (document.getElementById("stranger"))) {
         mail = cookie_get("mail");
@@ -298,13 +302,15 @@ function setConnectedTrue(){
 }
 
 function getAllServerPeople(){
-    if (document.getElementById("set_list_server")) {
-        webSocket.getAllServerPeople().then(list => {
-            if (list!=null) {
-                setPeopleShow(list);
-            }
-        });
-    }   
+    if (playing){
+        if (document.getElementById("set_list_server")) {
+            webSocket.getAllServerPeople().then(list => {
+                if (list!=null) {
+                    setPeopleShow(list);
+                }
+            });
+        }   
+    }
 }
 
 function setPeopleShow(list){
@@ -1112,11 +1118,13 @@ function addEmoji(nb) {
 
 
 function getObjects() {
-    webSocket.getObjects().then(list => {
-        if (list!=null) {
-            showObjects(list);
-        }
-    });
+    if (playing == true){
+        webSocket.getObjects().then(list => {
+            if (list!=null) {
+                showObjects(list);
+            }
+        });
+    }
 }
 
 function showObjects(all_elts) {
