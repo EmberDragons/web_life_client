@@ -988,14 +988,16 @@ function multiplayerCheck(t_server_id, mail_pers, name_pers, position_x_pers, po
 
 function add_multiplayer(mail_pers, name, color) {
     //visual
-    let text = "<div id='"+mail_pers+"' class='player_main'> <img src='https://icons.hackclub.com/api/icons/grey/down-caret' alt='Hack Club' class='player_arrow'><button class='player_name' id='"+mail_pers.trim()+"_name' onclick='see_profile("+'"'+mail_pers+'"'+")'>"+name+"</button><div class='player_graphics' id='"+mail_pers.trim()+"_graphics'></div></div>";
-    document.getElementById("Canvas").innerHTML=document.getElementById("Canvas").innerHTML+text;
-    const player_graphics = document.getElementById(mail_pers.trim()+"_graphics");
-    player_graphics.style.backgroundColor=color;
-    //the rest
-    let infos_pers = {"name":name, "color":color, "target_pos_x" : 500, "target_pos_y" : 500, "pos_x":500, "pos_y":500, "time" : 0};
-    dict_people_serv[mail_pers] = infos_pers;
-    console.log(dict_people_serv);
+    if (document.getElementById("Canvas") != null){
+        let text = "<div id='"+mail_pers+"' class='player_main'> <img src='https://icons.hackclub.com/api/icons/grey/down-caret' alt='Hack Club' class='player_arrow'><button class='player_name' id='"+mail_pers.trim()+"_name' onclick='see_profile("+'"'+mail_pers+'"'+")'>"+name+"</button><div class='player_graphics' id='"+mail_pers.trim()+"_graphics'></div></div>";
+        document.getElementById("Canvas").innerHTML=document.getElementById("Canvas").innerHTML+text;
+        const player_graphics = document.getElementById(mail_pers.trim()+"_graphics");
+        player_graphics.style.backgroundColor=color;
+        //the rest
+        let infos_pers = {"name":name, "color":color, "target_pos_x" : 500, "target_pos_y" : 500, "pos_x":500, "pos_y":500, "time" : 0};
+        dict_people_serv[mail_pers] = infos_pers;
+        console.log(dict_people_serv);
+    }
 }
 
 function remove_multiplayer(n_mail) {
