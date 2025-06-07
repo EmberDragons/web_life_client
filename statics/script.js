@@ -92,9 +92,10 @@ const GET_SHORT = () => {
 
 
     getAllServerPeople();
+    /*
     getObjects();
     multiplayer_get();
-    set_position_server();
+    set_position_server();*/
 }
 
 const GET_LONG = () => {
