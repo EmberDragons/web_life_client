@@ -457,6 +457,7 @@ function setProfileFriend() {
 
 function cookie_get(param){
     let infos = document.cookie.split(";");
+    console.log(infos);
     for (let part of infos){
         part=part.trim()
         if (part.startsWith(param)){
