@@ -295,11 +295,11 @@ function setConnectedTrue(){
 function getAllServerPeople(){
     
     if (document.getElementById("set_list_server")) {
-        let list = webSocket.getAllServerPeople();
-        console.log(list);
-        if (list!=null) {
-            setPeopleShow(list);
-        }
+        webSocket.getAllServerPeople().then(list => {
+            if (list!=null) {
+                setPeopleShow(list);
+            }
+        });
     }   
 }
 

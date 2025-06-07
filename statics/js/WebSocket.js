@@ -12,13 +12,18 @@ export class WebSocket {
     }
     
     getAllServerPeople() {
-        var list_server_nb ;
+        return new Promise((resolve, reject) => {
         if (document.getElementById("set_list_server")) {
-            this.socket.emit('serverPeople', { data : "none"}, function(response) {
-                list_server_nb = response['result'].split(',');
+            this.socket.emit('serverPeople', { data: "none" }, function(response) {
+                if (response && response['result']) {
+                    resolve(response['result'].split(','));
+                } else {
+                    reject('No response');
+                }
             });
-            return list_server_nb;
-        }   
-        return null;
+        } else {
+            resolve(null);
+        }
+    });
     }
 }
