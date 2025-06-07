@@ -305,15 +305,13 @@ function setConnectedTrue(){
 }
 
 function getAllServerPeople(){
-    if (playing){
-        if (document.getElementById("set_list_server")) {
-            webSocket.getAllServerPeople().then(list => {
-                if (list!=null) {
-                    setPeopleShow(list);
-                }
-            });
-        }   
-    }
+    if (document.getElementById("set_list_server")) {
+        webSocket.getAllServerPeople().then(list => {
+            if (list!=null) {
+                setPeopleShow(list);
+            }
+        });
+    }   
 }
 
 function setPeopleShow(list){
