@@ -11,12 +11,11 @@ export class WebSocket {
         this.socket.emit('my event', {data: 'I\'m connected!'});
     }
     
-    getAllServerPeople() {
+    getAllServerPeople(setPeopleShow) {
         var list_server_nb;
         if (document.getElementById("set_list_server")) {
             this.socket.emit('serverPeople', { data : "none"}, function(response) {
                 list_server_nb = response['result'].split(',');
-                setPeopleShow();
             });
         }   
         return list_server_nb;
