@@ -1,4 +1,4 @@
-import { SERVER_ADRESS } from "../script";
+import { SERVER_ADRESS } from "../script.js";
 
 export class WebSocket {
     constructor() {
