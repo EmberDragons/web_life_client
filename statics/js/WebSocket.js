@@ -14,7 +14,7 @@ export class WebSocket {
     getAllServerPeople() {
         var list_server_nb;
         if (document.getElementById("set_list_server")) {
-            this.socket.emit('serverPeople', function(response) {
+            this.socket.emit('serverPeople', { data : "none"}, function(response) {
                 list_server_nb = response.split(',');
                 setPeopleShow();
             });
