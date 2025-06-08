@@ -809,6 +809,7 @@ function forbidSTR(str){
 //PLAY PART
 
 function handleInput(){
+    console.log(controller);
     if (can_move==true){
         var list = [0,0,0,0];
         for(var key in controller) {
