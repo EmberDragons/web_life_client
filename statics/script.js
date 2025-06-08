@@ -241,7 +241,8 @@ function setNbRegistered() {
 function getpeopleOnline(){
     fetch(SERVER_ADRESS+'/getNBPeopleOnline', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json'}
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ id_password : id_password})
     })
     .then(response => {
         return response.json();
@@ -258,8 +259,8 @@ function getpeopleOnline(){
 function getpeopleRegistered(){
     fetch(SERVER_ADRESS+'/getNBPeople', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' ,
-                }
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({})
     })
     .then(response => response.json())
     .then(data => {
@@ -293,8 +294,7 @@ function setListServer() {
 function setConnectedTrue(){
     fetch(SERVER_ADRESS+'/updateOnlineTrue', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' ,
-                },
+        headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({ id_password : id_password})
     })
     .then(response => response.json())
