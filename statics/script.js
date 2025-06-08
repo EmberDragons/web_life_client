@@ -242,7 +242,7 @@ function getpeopleOnline(){
     fetch(SERVER_ADRESS+'/getNBPeopleOnline', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({ id_password : id_password})
+        body: JSON.stringify({})
     })
     .then(response => {
         return response.json();
