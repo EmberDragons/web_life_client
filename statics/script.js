@@ -514,7 +514,7 @@ function logOut() {
     const data = JSON.stringify({ id_password: id_password });
     navigator.sendBeacon(url, data);
 
-    document.cookie = "id_password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "id_password=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
     //short delay
     setTimeout(() => {
