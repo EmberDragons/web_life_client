@@ -231,6 +231,7 @@ function key_up_control(e) {
     controller[e.key] = false;
 }
 function key_down_control(e) {
+    console.log(e.key);
     controller[e.key] = true;
 }
 
@@ -817,7 +818,6 @@ function forbidSTR(str){
 function handleInput(){
     if (can_move==true){
         var list = [0,0,0,0];
-        console.log(controller);
         for(var key in controller) {
             var value = controller[key];
             if (value==true) {
