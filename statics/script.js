@@ -802,6 +802,7 @@ function forbidSTR(str){
     returnVal = str.includes(",");
     returnVal = str.includes("𩸽");
     returnVal = str.includes("§");
+    return returnVal;
 }
 
 //PLAY PART
