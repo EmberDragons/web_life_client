@@ -1165,7 +1165,6 @@ function getObjects() {
 }
 
 function showObjects(all_elts) {
-    console.log('virgin');
     for (let elt in all_elts){
         if (all_elts[elt] != ''){
             let infos = all_elts[elt].split('§');
