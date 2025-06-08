@@ -1,5 +1,6 @@
 import { FRAMERATE, GameLoop } from './js/GameLoop.js';
 import { WebSocket } from './js/WebSocket.js';
+import { CodiFiePassword } from './js/Password.js';
 
 export const SERVER_ADRESS = 'https://5718-2a02-8428-37af-b01-b9ab-269b-f67f-acd3.ngrok-free.app';
 
@@ -666,11 +667,13 @@ function submitLogin(event) {
     event.preventDefault();
     let mail = document.getElementById('mail_input').value;
     let password = document.getElementById('password_input').value;
+    //we are going to codifie this pass word lmao:
+    let n_password = CodiFiePassword(password);
 
 
     if (mail!=""){
         //send to the database the mail and password to check if it connects
-        log_in(mail, password);
+        log_in(mail, n_password);
     }
 }
 
@@ -713,13 +716,15 @@ function setNewPassword(event){
     event.preventDefault();
     let id_password = window.location.search.substring(1).replace("id_password=","");
     let new_password = document.getElementById('password_input').value;
+    //we are going to codifie this pass word lmao:
+    let n_password = CodiFiePassword(new_password);
     fetch(SERVER_ADRESS+'/changePassword', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             
         },
-        body: JSON.stringify({ mail : mail, new_password : new_password, id_password : id_password})
+        body: JSON.stringify({ mail : mail, new_password : n_password, id_password : id_password})
     })
     .then(response => response.json())
     .then(data => {
@@ -748,7 +753,7 @@ function submitRegister(event) {
     let mail = document.getElementById('mail_input').value;
     let password = document.getElementById('password_input').value;
     //we are going to codifie this pass word lmao:
-
+    let n_password = CodiFiePassword(password);
 
     const regex_test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (mail.length<5 && regex_test.test(mail)){
@@ -760,11 +765,11 @@ function submitRegister(event) {
                 'Content-Type': 'application/json',
                 
             },
-            body: JSON.stringify({name : name, mail : mail, password : password})
+            body: JSON.stringify({name : name, mail : mail, password : n_password})
         })
         .then(response => response.json())
         .then(data => {
-            log_in(mail, password);
+            log_in(mail, n_password);
             if (data.result == "Error-already_in_database"){
                 alert("email already used");
                 console.error(data.result);
