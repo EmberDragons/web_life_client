@@ -237,7 +237,6 @@ function setNbRegistered() {
     }
 }
 
-
 function getpeopleOnline(){
     fetch(SERVER_ADRESS+'/getNBPeopleOnline', {
         method: 'POST',
