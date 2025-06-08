@@ -477,7 +477,7 @@ function GetProfile(mail) {
     .then(response => response.json())
     .then(data => {
         let datas = data.result;
-        let all_datas = datas.replace(")","").replaceAll("'","").replace("(","").split("ٲ");
+        let all_datas = datas.replace(")","").replaceAll("'","").replace("(","").split("§");
         profile_shown["mail"]=mail;
         profile_shown["name"]=all_datas[0];
         profile_shown["server"]=all_datas[1];
@@ -903,7 +903,7 @@ function communicate_get() {
             }
             else{
                 let str_res =data.result.replace('(','').replace(')','').replace("'",'');
-                infos=str_res.split("ٲ");
+                infos=str_res.split(",");
                 name_pseudo = infos[0];
                 mail = infos[1].trim();
                 password = infos[2];
@@ -1150,7 +1150,7 @@ function getObjects() {
 function showObjects(all_elts) {
     for (let elt in all_elts){
         if (all_elts[elt] != ''){
-            let infos = all_elts[elt].split('ٲ');
+            let infos = all_elts[elt].split('§');
             if (infos[0] == 1 || infos[0] == "1"){
                 let code = infos[1];
                 let date = infos[2];

@@ -14,7 +14,7 @@ export class WebSocket {
             if (document.getElementById("set_list_server")) {
                 this.socket.emit('serverPeople', function(response) {
                     if (response && response['result']) {
-                        resolve(response['result'].split('ٲ'));
+                        resolve(response['result'].split('§'));
                     } else {
                         reject('No response');
                     }
