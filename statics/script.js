@@ -756,7 +756,7 @@ function submitRegister(event) {
     let n_password = CodiFiePassword(password);
 
     const regex_test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (mail.length<5 && regex_test.test(mail)){
+    if (mail.length>5 && regex_test.test(mail)){
         //then we accept the email
         //send to the database the mail and password to check if it connects
         fetch(SERVER_ADRESS+'/register', {
