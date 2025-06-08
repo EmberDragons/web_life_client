@@ -30,10 +30,10 @@ var controller = {"a" : false,
                 "w" : false,
                 "z" : false,
                 "s" : false,
-                37 : false,
-                38 : false,
-                39 : false,
-                40 : false}; //for all inputs and keys
+                "ArrowLeft" : false,
+                "ArrowUp" : false,
+                "ArrowDown" : false,
+                "ArrowRight" : false}; //for all inputs and keys
 
 var can_move=true;
 
@@ -197,6 +197,12 @@ window.addEventListener("beforeunload", (event) => {
 
 
 //input handler
+window.addEventListener("keydown", (event) => {
+    key_down_control(event);
+});
+window.addEventListener("keyup", (event) => {
+    key_up_control(event);
+});
 window.addEventListener("onkeydown", (event) => {
     key_down_control(event);
 });
@@ -504,12 +510,16 @@ function GetProfile(mail) {
 }
 
 function logOut() {
-    const url = SERVER_ADRESS+'/updateOnlineFalse';
+    const url = SERVER_ADRESS + '/updateOnlineFalse';
     const data = JSON.stringify({ id_password: id_password });
     navigator.sendBeacon(url, data);
 
-    document.cookie="id_password = ''; expires=Thu, 03 Aug 2008 12:00:00 UTC; path=/";
-    open('login.html',"_self");
+    document.cookie = "id_password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    //short delay
+    setTimeout(() => {
+        open('login.html', "_self");
+    }, 100);
 }
 
 
@@ -818,13 +828,13 @@ function handleInput(){
             var value = controller[key];
             if (value==true) {
                 //we do smth
-                if (key == "a" || key == "q"|| key == 37){
+                if (key == "a" || key == "q"|| key == "ArrowLeft"){
                     list[0] = speed_x;
-                }if (key == "d"|| key == 39){
+                }if (key == "d"|| key == "ArrowRight"){
                     list[1] = speed_x;
-                }if (key == "w" || key == "z"|| key == 38){
+                }if (key == "w" || key == "z"|| key == "ArrowUp"){
                     list[2] = speed_y;
-                }if (key == "s"|| key == 40){
+                }if (key == "s"|| key == 40|| key == "ArrowDown"){
                     list[3] = speed_y;
                 }
             }
