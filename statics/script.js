@@ -242,11 +242,9 @@ function getpeopleOnline(){
     fetch(SERVER_ADRESS+'/getNBPeopleOnline', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({})
+        body: JSON.stringify({ id_password : id_password})
     })
-    .then(response => {
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         nb_people_online=data.result;
         setNbConnected();
@@ -260,7 +258,7 @@ function getpeopleRegistered(){
     fetch(SERVER_ADRESS+'/getNBPeople', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({})
+        body: JSON.stringify({ id_password : id_password})
     })
     .then(response => response.json())
     .then(data => {
