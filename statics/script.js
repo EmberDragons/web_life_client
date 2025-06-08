@@ -747,8 +747,10 @@ function submitRegister(event) {
     let name = document.getElementById('name_input').value;
     let mail = document.getElementById('mail_input').value;
     let password = document.getElementById('password_input').value;
+    //we are going to codifie this pass word lmao:
 
-    const regex_test = "^[^\s@]+@[^\s@]+\.[^\s@]+$";
+
+    const regex_test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (mail.length<5 && regex_test.test(mail)){
         //then we accept the email
         //send to the database the mail and password to check if it connects
