@@ -1031,12 +1031,6 @@ body {
     color: grey;
 }
 
-footer {
-    max-height: 100px;
-    position: sticky;
-    bottom:0px;
-}
-
 html {
     background: url(img/background.svg) no-repeat center center; 
     background-size: cover;
