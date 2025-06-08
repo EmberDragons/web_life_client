@@ -913,7 +913,7 @@ function communicate_get() {
                 infos=str_res.split(",");
                 name_pseudo = infos[0];
                 mail = infos[1].trim();
-                password = infos[2];
+                password = "change_password"; //you gotta find an other way man
                 server_id = infos[3];
                 color = infos[4].trim();
                 banner_color = infos[5].trim();
