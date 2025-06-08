@@ -1032,6 +1032,7 @@ body {
 }
 
 footer {
+    max-height: 100px;
     position: sticky;
 }
 
