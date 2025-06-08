@@ -562,24 +562,26 @@ function setProfileShow() {
 
         //set the new name and password
         //send to the database the mail and password to check if it connects
-        fetch(SERVER_ADRESS+'/updateProfile', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                
-            },
-            body: JSON.stringify({ name : p_name, password : n_pass, color : col, banner_color : banner_col, id : id_password})
-        })
-        .then(response => response.json())
-        .then(data => {
-            communicate_get();
-            console.log(data.result);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        if (forbidSTR(p_name)){
+            fetch(SERVER_ADRESS+'/updateProfile', {
+                method: 'POST',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    
+                },
+                body: JSON.stringify({ name : p_name, password : n_pass, color : col, banner_color : banner_col, id : id_password})
+            })
+            .then(response => response.json())
+            .then(data => {
+                communicate_get();
+                console.log(data.result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
     }
 
 
