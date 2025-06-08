@@ -244,6 +244,7 @@ function getpeopleOnline(){
         headers: { 'Content-Type': 'application/json'}
     })
     .then(response => {
+        console.log(response.json());
         return response.json();
     })
     .then(data => {
@@ -458,7 +459,6 @@ function setProfileFriend() {
 
 function cookie_get(param){
     let infos = document.cookie.split(";");
-    console.log(infos);
     for (let part of infos){
         part=part.trim()
         if (part.startsWith(param)){
