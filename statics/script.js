@@ -748,32 +748,38 @@ function submitRegister(event) {
     let mail = document.getElementById('mail_input').value;
     let password = document.getElementById('password_input').value;
 
+    const regex_test = "^[^\s@]+@[^\s@]+\.[^\s@]+$";
+    if (mail.length<5 && regex_test.test(mail)){
+        //then we accept the email
+        //send to the database the mail and password to check if it connects
+        fetch(SERVER_ADRESS+'/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                
+            },
+            body: JSON.stringify({name : name, mail : mail, password : password})
+        })
+        .then(response => response.json())
+        .then(data => {
+            log_in(mail, password);
+            if (data.result == "Error-already_in_database"){
+                alert("email already used");
+                console.error(data.result);
+            }
+            else{
+                //success
+                console.log(data.result);
+            }
 
-    //send to the database the mail and password to check if it connects
-    fetch(SERVER_ADRESS+'/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            
-        },
-        body: JSON.stringify({name : name, mail : mail, password : password})
-    })
-    .then(response => response.json())
-    .then(data => {
-        log_in(mail, password);
-        if (data.result == "Error-already_in_database"){
-            alert("email already used");
-            console.error(data.result);
-        }
-        else{
-            //success
-            console.log(data.result);
-        }
-
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    else {
+        alert("Use a real email please");
+    }
 }
 
 //PLAY PART
