@@ -594,6 +594,9 @@ function setProfileShow() {
         +"<p class='profile_server' id='profile_server'> Server "+server_id+" </p>"
         +"<button class='log_out_button' onclick='logOut()'> <img class='log_out_image' src='https://icons.hackclub.com/api/icons/white/door-leave' style='width:45px;'></button> ");
 
+    if (document.getElementById("list_friends")!=null){
+        setFriendList();
+    }
 }
 
 function setProfileModifie() {
