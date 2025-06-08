@@ -30,10 +30,10 @@ var controller = {"a" : false,
                 "w" : false,
                 "z" : false,
                 "s" : false,
-                "ArrowLeft" : false,
-                "ArrowUp" : false,
-                "ArrowDown" : false,
-                "ArrowRight" : false}; //for all inputs and keys
+                37 : false,
+                38 : false,
+                39 : false,
+                40 : false}; //for all inputs and keys
 
 var can_move=true;
 
@@ -197,12 +197,6 @@ window.addEventListener("beforeunload", (event) => {
 
 
 //input handler
-window.addEventListener("keydown", (event) => {
-    key_down_control(event);
-});
-window.addEventListener("keyup", (event) => {
-    key_up_control(event);
-});
 window.addEventListener("onkeydown", (event) => {
     key_down_control(event);
 });
@@ -510,8 +504,11 @@ function GetProfile(mail) {
 }
 
 function logOut() {
+    const url = SERVER_ADRESS+'/updateOnlineFalse';
+    const data = JSON.stringify({ id_password: id_password });
+    navigator.sendBeacon(url, data);
+
     document.cookie="id_password = ''; expires=Thu, 03 Aug 2008 12:00:00 UTC; path=/";
-    
     open('login.html',"_self");
 }
 
@@ -821,13 +818,13 @@ function handleInput(){
             var value = controller[key];
             if (value==true) {
                 //we do smth
-                if (key == "a" || key == "q"|| key == "ArrowLeft"){
+                if (key == "a" || key == "q"|| key == 37){
                     list[0] = speed_x;
-                }if (key == "d"|| key == "ArrowRight"){
+                }if (key == "d"|| key == 39){
                     list[1] = speed_x;
-                }if (key == "w" || key == "z"|| key == "ArrowUp"){
+                }if (key == "w" || key == "z"|| key == 38){
                     list[2] = speed_y;
-                }if (key == "s"|| key == 40|| key == "ArrowDown"){
+                }if (key == "s"|| key == 40){
                     list[3] = speed_y;
                 }
             }
