@@ -561,7 +561,7 @@ function setProfileShow() {
 
         //set the new name and password
         //send to the database the mail and password to check if it connects
-        if (forbidSTR(p_name)){
+        if (forbidSTR(p_name) && p_name.length <=14){
             fetch(SERVER_ADRESS+'/updateProfile', {
                 method: 'POST',
                 mode: 'cors',
