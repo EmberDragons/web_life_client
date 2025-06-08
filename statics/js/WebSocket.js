@@ -25,10 +25,10 @@ export class WebSocket {
         });
     }
 
-    getObjects() {
+    getObjects(dict) {
         return new Promise((resolve, reject) => {
             //send to the server the emoji
-            this.socket.emit('getObjectList', function(response) {
+            this.socket.emit('getObjectList',dict, function(response) {
                 if (response && response['result']) {
                     resolve(response['result'].split("𩸽"));
                 } else {

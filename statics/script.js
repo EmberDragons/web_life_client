@@ -561,7 +561,7 @@ function setProfileShow() {
 
         //set the new name and password
         //send to the database the mail and password to check if it connects
-        if (forbidSTR(p_name) && p_name.length <=14){
+        if (forbidSTR(p_name) && p_name.length <=20){
             fetch(SERVER_ADRESS+'/updateProfile', {
                 method: 'POST',
                 mode: 'cors',
@@ -1157,7 +1157,7 @@ function addEmoji(nb) {
 
 function getObjects() {
     if (playing == true){
-        webSocket.getObjects().then(list => {
+        webSocket.getObjects({server_id:server_id}).then(list => {
             if (list!=null) {
                 showObjects(list);
             }
