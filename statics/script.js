@@ -797,12 +797,7 @@ function submitRegister(event) {
 }
 
 function forbidSTR(str){
-    let returnVal = true;
-    returnVal = str.includes(";");
-    returnVal = str.includes(",");
-    returnVal = str.includes("𩸽");
-    returnVal = str.includes("§");
-    console.log(returnVal);
+    let returnVal = (!str.includes(";") && !str.includes(",") && !str.includes("𩸽") && !str.includes("§"));
     return returnVal;
 }
 
