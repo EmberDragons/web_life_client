@@ -758,7 +758,7 @@ function submitRegister(event) {
     let n_password = CodiFiePassword(password);
 
     const regex_test = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (mail.length>5 && regex_test.test(mail)){
+    if (mail.length>5 && regex_test.test(mail) && forbidSTR(name) && forbidSTR(mail)){
         //then we accept the email
         //send to the database the mail and password to check if it connects
         fetch(SERVER_ADRESS+'/register', {
@@ -787,8 +787,16 @@ function submitRegister(event) {
         });
     }
     else {
-        alert("Use a real email please");
+        alert("email or name is forbidden");
     }
+}
+
+function forbidSTR(str){
+    let returnVal = true;
+    returnVal = str.includes(";");
+    returnVal = str.includes(",");
+    returnVal = str.includes("𩸽");
+    returnVal = str.includes("§");
 }
 
 //PLAY PART
