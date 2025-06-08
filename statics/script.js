@@ -231,7 +231,6 @@ function key_up_control(e) {
     controller[e.key] = false;
 }
 function key_down_control(e) {
-    console.log(e.key);
     controller[e.key] = true;
 }
 
