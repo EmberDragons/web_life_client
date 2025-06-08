@@ -240,7 +240,7 @@ function setNbRegistered() {
 
 function getpeopleOnline(){
     fetch(SERVER_ADRESS+'/getNBPeopleOnline', {
-        method: 'GET',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({})
     })
@@ -258,7 +258,7 @@ function getpeopleOnline(){
 
 function getpeopleRegistered(){
     fetch(SERVER_ADRESS+'/getNBPeople', {
-        method: 'GET',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({})
     })
