@@ -244,11 +244,9 @@ function getpeopleOnline(){
         headers: { 'Content-Type': 'application/json'}
     })
     .then(response => {
-        console.log(response.json());
         return response.json();
     })
     .then(data => {
-        console.log(data.result);
         nb_people_online=data.result;
         setNbConnected();
     })
