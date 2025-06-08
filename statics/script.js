@@ -519,7 +519,7 @@ function logOut() {
     //short delay
     setTimeout(() => {
         open('login.html', "_self");
-    }, 1000);
+    }, 100);
 }
 
 
