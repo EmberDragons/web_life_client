@@ -1040,7 +1040,6 @@ function add_multiplayer(mail_pers, name, color) {
         //the rest
         let infos_pers = {"name":name, "color":color, "target_pos_x" : 500, "target_pos_y" : 500, "pos_x":500, "pos_y":500, "time" : 0};
         dict_people_serv[mail_pers] = infos_pers;
-        console.log(dict_people_serv);
     }
 }
 
@@ -1156,7 +1155,7 @@ function addEmoji(nb) {
 
 
 function getObjects() {
-    if (playing == true){
+    if (playing == true && server_id!=undefined){
         webSocket.getObjects({server_id:server_id}).then(list => {
             if (list!=null) {
                 showObjects(list);
@@ -1166,6 +1165,7 @@ function getObjects() {
 }
 
 function showObjects(all_elts) {
+    console.log('virgin');
     for (let elt in all_elts){
         if (all_elts[elt] != ''){
             let infos = all_elts[elt].split('§');
