@@ -555,6 +555,8 @@ function setProfileShow() {
     if (document.getElementById("profile_name")!= null && document.getElementById("profile_password")!=null&& document.getElementById("profile_color")!=null&& document.getElementById("profile_banner_color")!=null){
         let p_name = document.getElementById("profile_name").value;
         let pass = document.getElementById("profile_password").value;
+        let n_pass = CodiFiePassword(pass); //btw n_pass is for new password, please ...
+
         let col = document.getElementById("profile_color").value;
         let banner_col = document.getElementById("profile_banner_color").value;
 
@@ -568,7 +570,7 @@ function setProfileShow() {
                 'Content-Type': 'application/json',
                 
             },
-            body: JSON.stringify({ name : p_name, password : pass, color : col, banner_color : banner_col, id : id_password})
+            body: JSON.stringify({ name : p_name, password : n_pass, color : col, banner_color : banner_col, id : id_password})
         })
         .then(response => response.json())
         .then(data => {
