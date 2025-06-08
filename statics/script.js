@@ -147,21 +147,6 @@ function retrieveInfos() {
     communicate_get();
 }
 
-function clearData(){
-    
-    name_pseudo=undefined;
-    mail=undefined;
-    password=undefined;
-    server_id=undefined;
-    color = "#FFFFFF";
-    banner_color = "#FFFFFF";
-    list_friends=undefined;
-    id_password=undefined;
-
-    position_x=500;
-    position_y=500;
-    online=false;
-}
 
 //update background color+caracter color too
 document.addEventListener("input", updateColor, false);
@@ -530,12 +515,11 @@ function logOut() {
     navigator.sendBeacon(url, data);
 
     document.cookie = "id_password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    clearData();
 
     //short delay
     setTimeout(() => {
         open('login.html', "_self");
-    }, 500);
+    }, 1000);
 }
 
 
