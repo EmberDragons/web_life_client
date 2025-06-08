@@ -1034,6 +1034,7 @@ body {
 footer {
     max-height: 100px;
     position: sticky;
+    bottom:0px;
 }
 
 html {
