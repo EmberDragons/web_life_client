@@ -14,7 +14,7 @@ export class WebSocket {
             if (document.getElementById("set_list_server")) {
                 this.socket.emit('serverPeople', function(response) {
                     if (response && response['result']) {
-                        resolve(response['result'].split(','));
+                        resolve(response['result'].split('ٲ'));
                     } else {
                         reject('No response');
                     }
@@ -30,7 +30,7 @@ export class WebSocket {
             //send to the server the emoji
             this.socket.emit('getObjectList', function(response) {
                 if (response && response['result']) {
-                    resolve(response['result'].split("|"));
+                    resolve(response['result'].split("𩸽"));
                 } else {
                     reject('No response');
                 }
