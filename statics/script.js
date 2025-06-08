@@ -197,6 +197,12 @@ window.addEventListener("beforeunload", (event) => {
 
 
 //input handler
+window.addEventListener("keydown", (event) => {
+    key_down_control(event);
+});
+window.addEventListener("keyup", (event) => {
+    key_up_control(event);
+});
 window.addEventListener("onkeydown", (event) => {
     key_down_control(event);
 });
@@ -809,9 +815,9 @@ function forbidSTR(str){
 //PLAY PART
 
 function handleInput(){
-    console.log(controller);
     if (can_move==true){
         var list = [0,0,0,0];
+        console.log(controller);
         for(var key in controller) {
             var value = controller[key];
             if (value==true) {
