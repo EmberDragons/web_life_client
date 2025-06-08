@@ -429,7 +429,6 @@ function is_friend(mail) {
 }
 
 function setProfileStranger() {
-    console.log(profile_shown["name"]);
     document.getElementById("wrapper").style.borderColor = profile_shown["banner_color"];
     document.getElementById('caracter').style.backgroundColor=profile_shown["color"];
     document.getElementById('banner').style.backgroundColor=profile_shown["banner_color"];
@@ -478,7 +477,7 @@ function GetProfile(mail) {
     .then(response => response.json())
     .then(data => {
         let datas = data.result;
-        let all_datas = datas.replace(")","").replaceAll("'","").replace("(","").split("§");
+        let all_datas = datas.replace(")","").replaceAll("'","").replace("(","").split(",");
         profile_shown["mail"]=mail;
         profile_shown["name"]=all_datas[0];
         profile_shown["server"]=all_datas[1];
