@@ -470,7 +470,7 @@ function setProfileStranger() {
     removeBtn.onclick = add_friend;
 
     const removeImg = document.createElement("img");
-    removeImg.className = "profile_other_name_image_remove";
+    removeImg.className = "profile_other_name_image";
     removeImg.src = "https://icons.hackclub.com/api/icons/white/friend";
     removeImg.style.width = "45px";
     removeBtn.appendChild(removeImg);
