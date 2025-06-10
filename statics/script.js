@@ -1526,6 +1526,10 @@ function sendMessage(){
     if (code.length >= max_caracters){
         alert("Too much caracters, please shorten your sentence");
     }
+    if (code.length == 0){
+        console.log('damn write smth at least...');
+        return;
+    }
     else{
         showText(code, Date.now(), mail, true);
         //send to the server the emoji
