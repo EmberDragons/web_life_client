@@ -453,9 +453,12 @@ function setProfileStranger() {
 }
 
 function setProfileFriend() {
-    //loading someone else profile
+    //updating the profile 
+    document.getElementById("wrapper").style.borderColor = profile_shown["banner_color"];
+    document.getElementById('caracter').style.backgroundColor = profile_shown["color"];
+    document.getElementById('banner').style.backgroundColor = profile_shown["banner_color"];
     const othersProfile = document.getElementById("others_profile");
-    othersProfile.innerHTML = "";
+    othersProfile.innerHTML = ""; // Clear previous content
 
     // Profile image
     const img = document.createElement("img");
@@ -499,8 +502,6 @@ function setProfileFriend() {
     serverP.id = "profile_server";
     serverP.textContent = "Server " + profile_shown["server"];
     othersProfile.appendChild(serverP);
-
-    //we add all the new informations
 }
 
 function cookie_get(param){
