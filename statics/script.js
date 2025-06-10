@@ -683,14 +683,80 @@ function setProfileShow() {
     }
 
 
-    document.getElementById("modifie_profile").innerHTML=
-        ("<img src='https://icons.hackclub.com/api/icons/grey/profile-fill' style='position:absolute; left: 35px; top:38px; width:60px;'> "
-        +"<h2 class='profile_name' id='profile_name'> "+name_pseudo+" </h2>"
-        +"<button class='profile_button' onclick='setProfileModifie()'> <img class='profile_name_image' src='https://icons.hackclub.com/api/icons/white/edit' style='width:45px;'></button> "
-        +"<p class='profile_mail' id='profile_mail'> "+ mail +" </p>"
-        +"<div id='list_friends' style='position:absolute;right:60px;top:180px; width:250px;'><button class='friend_name' onclick='see_profile('none')'> none</button></div>"
-        +"<p class='profile_server' id='profile_server'> Server "+server_id+" </p>"
-        +"<button class='log_out_button' onclick='logOut()'> <img class='log_out_image' src='https://icons.hackclub.com/api/icons/white/door-leave' style='width:45px;'></button> ");
+    const modifieProfile = document.getElementById("modifie_profile");
+    modifieProfile.innerHTML = ""; // Clear previous content
+
+    // Profile image
+    const img = document.createElement("img");
+    img.src = "https://icons.hackclub.com/api/icons/grey/profile-fill";
+    img.style.position = "absolute";
+    img.style.left = "35px";
+    img.style.top = "38px";
+    img.style.width = "60px";
+    modifieProfile.appendChild(img);
+
+    // Name
+    const nameH2 = document.createElement("h2");
+    nameH2.className = "profile_name";
+    nameH2.id = "profile_name";
+    nameH2.textContent = " " + name_pseudo + " ";
+    modifieProfile.appendChild(nameH2);
+
+    // Edit button
+    const editBtn = document.createElement("button");
+    editBtn.className = "profile_button";
+    editBtn.onclick = setProfileModifie;
+
+    const editImg = document.createElement("img");
+    editImg.className = "profile_name_image";
+    editImg.src = "https://icons.hackclub.com/api/icons/white/edit";
+    editImg.style.width = "45px";
+    editBtn.appendChild(editImg);
+
+    modifieProfile.appendChild(editBtn);
+
+    // Email
+    const mailP = document.createElement("p");
+    mailP.className = "profile_mail";
+    mailP.id = "profile_mail";
+    mailP.textContent = mail;
+    modifieProfile.appendChild(mailP);
+
+    // Friends list
+    const friendsDiv = document.createElement("div");
+    friendsDiv.id = "list_friends";
+    friendsDiv.style.position = "absolute";
+    friendsDiv.style.right = "60px";
+    friendsDiv.style.top = "180px";
+    friendsDiv.style.width = "250px";
+
+    const noneBtn = document.createElement("button");
+    noneBtn.className = "friend_name";
+    noneBtn.onclick = () => see_profile('none');
+    noneBtn.textContent = "none";
+    friendsDiv.appendChild(noneBtn);
+
+    modifieProfile.appendChild(friendsDiv);
+
+    // Server
+    const serverP = document.createElement("p");
+    serverP.className = "profile_server";
+    serverP.id = "profile_server";
+    serverP.textContent = "Server " + server_id;
+    modifieProfile.appendChild(serverP);
+
+    // Log out button
+    const logOutBtn = document.createElement("button");
+    logOutBtn.className = "log_out_button";
+    logOutBtn.onclick = logOut;
+
+    const logOutImg = document.createElement("img");
+    logOutImg.className = "log_out_image";
+    logOutImg.src = "https://icons.hackclub.com/api/icons/white/door-leave";
+    logOutImg.style.width = "45px";
+    logOutBtn.appendChild(logOutImg);
+
+    modifieProfile.appendChild(logOutBtn);
 
     if (document.getElementById("list_friends")!=null){
         setFriendList();
@@ -698,16 +764,90 @@ function setProfileShow() {
 }
 
 function setProfileModifie() {
+    const modifieProfile = document.getElementById("modifie_profile");
+    modifieProfile.innerHTML = ""; // Clear previous content
 
-    document.getElementById("modifie_profile").innerHTML=
-        ("<input type='color' value='"+banner_color+"' id='profile_banner_color' style='position:absolute;right:10px;top:135px;'>"
-        +"<input type='color' value='"+color+"' id='profile_color' style='width: 30px;height: 25px;position:absolute;left:100px;top:200px;'>"
-        +"<img src='https://icons.hackclub.com/api/icons/grey/profile-fill' style='position:absolute; left: 35px; top:38px; width:60px'> "
-        +"<input class='profile_name' id='profile_name' placeholder="+name_pseudo+" style='height:34px; width:200px; font-size: 32px; color:black;'>"
-        +"<button class='profile_button' onclick='setProfileShow(event)'> <img class='save_profile' src='https://icons.hackclub.com/api/icons/white/post' style='padding-top: 2px; padding-bottom: -2px; width:45px;'></button>" 
-        +"<p class='profile_mail' id='profile_mail'> "+ mail +" </p>"
-        +"<img src='https://icons.hackclub.com/api/icons/grey/private-outline' class='profile_password_icon'><input class='profile_password' id='profile_password' placeholder="+password+">"
-        +"<p class='profile_server'> Server "+server_id+" </p>");
+    // Banner color input
+    const bannerColorInput = document.createElement("input");
+    bannerColorInput.type = "color";
+    bannerColorInput.value = banner_color;
+    bannerColorInput.id = "profile_banner_color";
+    bannerColorInput.style.position = "absolute";
+    bannerColorInput.style.right = "10px";
+    bannerColorInput.style.top = "135px";
+    modifieProfile.appendChild(bannerColorInput);
+
+    // Character color input
+    const colorInput = document.createElement("input");
+    colorInput.type = "color";
+    colorInput.value = color;
+    colorInput.id = "profile_color";
+    colorInput.style.width = "30px";
+    colorInput.style.height = "25px";
+    colorInput.style.position = "absolute";
+    colorInput.style.left = "100px";
+    colorInput.style.top = "200px";
+    modifieProfile.appendChild(colorInput);
+
+    // Profile image
+    const img = document.createElement("img");
+    img.src = "https://icons.hackclub.com/api/icons/grey/profile-fill";
+    img.style.position = "absolute";
+    img.style.left = "35px";
+    img.style.top = "38px";
+    img.style.width = "60px";
+    modifieProfile.appendChild(img);
+
+    // Name input
+    const nameInput = document.createElement("input");
+    nameInput.className = "profile_name";
+    nameInput.id = "profile_name";
+    nameInput.placeholder = name_pseudo;
+    nameInput.style.height = "34px";
+    nameInput.style.width = "200px";
+    nameInput.style.fontSize = "32px";
+    nameInput.style.color = "black";
+    modifieProfile.appendChild(nameInput);
+
+    // Save button
+    const saveBtn = document.createElement("button");
+    saveBtn.className = "profile_button";
+    saveBtn.onclick = setProfileShow;
+
+    const saveImg = document.createElement("img");
+    saveImg.className = "save_profile";
+    saveImg.src = "https://icons.hackclub.com/api/icons/white/post";
+    saveImg.style.paddingTop = "2px";
+    saveImg.style.paddingBottom = "-2px";
+    saveImg.style.width = "45px";
+    saveBtn.appendChild(saveImg);
+
+    modifieProfile.appendChild(saveBtn);
+
+    // Email
+    const mailP = document.createElement("p");
+    mailP.className = "profile_mail";
+    mailP.id = "profile_mail";
+    mailP.textContent = mail;
+    modifieProfile.appendChild(mailP);
+
+    // Password icon and input
+    const passIcon = document.createElement("img");
+    passIcon.src = "https://icons.hackclub.com/api/icons/grey/private-outline";
+    passIcon.className = "profile_password_icon";
+    modifieProfile.appendChild(passIcon);
+
+    const passInput = document.createElement("input");
+    passInput.className = "profile_password";
+    passInput.id = "profile_password";
+    passInput.placeholder = password;
+    modifieProfile.appendChild(passInput);
+
+    // Server ID
+    const serverP = document.createElement("p");
+    serverP.className = "profile_server";
+    serverP.textContent = "Server " + server_id;
+    modifieProfile.appendChild(serverP);
 }
 
 
