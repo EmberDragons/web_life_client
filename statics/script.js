@@ -444,12 +444,52 @@ function setProfileStranger() {
     document.getElementById("wrapper").style.borderColor = profile_shown["banner_color"];
     document.getElementById('caracter').style.backgroundColor=profile_shown["color"];
     document.getElementById('banner').style.backgroundColor=profile_shown["banner_color"];
-    document.getElementById("others_profile").innerHTML=
-        ("<img src='https://icons.hackclub.com/api/icons/grey/profile-fill' style='position:absolute; left: 35px; top:38px; width:60px'>" +
-        "<h2 class='profile_name' id='profile_name'>  "+profile_shown["name"]+"</h2>" +
-        "<button class='profile_other_button' onclick='add_friend()'> <img class='profile_other_name_image' src='https://icons.hackclub.com/api/icons/white/friend' style='width:45px;'></button>"+
-        "<p class='profile_mail' id='profile_mail'>" +profile_shown["mail"]+ "</p>"+
-        "<p class='profile_server' id ='profile_server'> Server "+profile_shown["server"]+" </p>");
+    
+    const othersProfile = document.getElementById("others_profile");
+    othersProfile.innerHTML = ""; // Clear previous content
+
+    // Profile image
+    const img = document.createElement("img");
+    img.src = "https://icons.hackclub.com/api/icons/grey/profile-fill";
+    img.style.position = "absolute";
+    img.style.left = "35px";
+    img.style.top = "38px";
+    img.style.width = "60px";
+    othersProfile.appendChild(img);
+
+    // Name
+    const nameH2 = document.createElement("h2");
+    nameH2.className = "profile_name";
+    nameH2.id = "profile_name";
+    nameH2.textContent = "  " + profile_shown["name"];
+    othersProfile.appendChild(nameH2);
+
+    // Add friend button
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "profile_other_button";
+    removeBtn.onclick = add_friend;
+
+    const removeImg = document.createElement("img");
+    removeImg.className = "profile_other_name_image_remove";
+    removeImg.src = "https://icons.hackclub.com/api/icons/white/friend";
+    removeImg.style.width = "45px";
+    removeBtn.appendChild(removeImg);
+
+    othersProfile.appendChild(removeBtn);
+
+    // Email
+    const mailP = document.createElement("p");
+    mailP.className = "profile_mail";
+    mailP.id = "profile_mail";
+    mailP.textContent = profile_shown["mail"];
+    othersProfile.appendChild(mailP);
+
+    // Server ID
+    const serverP = document.createElement("p");
+    serverP.className = "profile_server";
+    serverP.id = "profile_server";
+    serverP.textContent = "Server " + profile_shown["server"];
+    othersProfile.appendChild(serverP);
 }
 
 function setProfileFriend() {
