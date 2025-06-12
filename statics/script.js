@@ -628,6 +628,7 @@ function setProfile() {
 }
 
 function setFriendList() {
+    const regx = /[^@]*$/;
     const list = list_friends.split(";");
     var show_list = "";
 
@@ -637,7 +638,7 @@ function setFriendList() {
             virg="";
         }
         if (list[nb].trim() != ""){
-            show_list+=virg+"<button class='friend_name' onclick='see_profile("+'"'+list[nb].trim()+'"'+")'>"+list[nb].trim()+"</button>";
+            show_list+=virg+"<button class='friend_name' onclick='see_profile("+'"'+list[nb].trim()+'"'+")'>"+list[nb].trim().replace(regx,'').replace('@','')+"</button>";
         }
     }
     document.getElementById('list_friends').innerHTML = show_list;
