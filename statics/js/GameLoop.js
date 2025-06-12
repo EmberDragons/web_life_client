@@ -1,3 +1,4 @@
+
 export const FRAMERATE = 50;
 
 export class GameLoop{
