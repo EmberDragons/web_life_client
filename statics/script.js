@@ -612,8 +612,7 @@ function setProfile() {
             document.getElementById("profile_name").innerHTML=name_pseudo;
         }
         if (document.getElementById("profile_mail")!=null){
-            const regx = /[^@]*$/;
-            document.getElementById("profile_mail").innerHTML=mail.replace(regx,'').replace('@','');
+            document.getElementById("profile_mail").innerHTML=mail;
         }
         if (document.getElementById("profile_server")!=null){
             document.getElementById("profile_server").innerHTML="Server "+server_id;
