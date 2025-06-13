@@ -2,13 +2,13 @@ import { FRAMERATE, GameLoop } from './js/GameLoop.js';
 import { WebSocket } from './js/WebSocket.js';
 import { CodiFiePassword } from './js/Password.js';
 
-export const SERVER_ADRESS = 'https://dd62-2a02-8428-37af-b01-4181-1a91-240e-323.ngrok-free.app';
+export const SERVER_ADRESS = 'https://b8e3-2a02-8428-37af-b01-4181-1a91-240e-323.ngrok-free.app';
 
 var password_state = false;
 var max_server = 8;
 
 var infos;
-var max_people_server =30;
+var max_people_server = 30;
 
 var name_pseudo;
 var mail;
@@ -481,7 +481,8 @@ function setProfileStranger() {
     const mailP = document.createElement("p");
     mailP.className = "profile_mail";
     mailP.id = "profile_mail";
-    mailP.textContent = profile_shown["mail"];
+    const regx = /[^@]*$/;
+    mailP.textContent = profile_shown["mail"].replace(regx,'').replace('@','');
     othersProfile.appendChild(mailP);
 
     // Server ID
@@ -533,7 +534,8 @@ function setProfileFriend() {
     const mailP = document.createElement("p");
     mailP.className = "profile_mail";
     mailP.id = "profile_mail";
-    mailP.textContent = profile_shown["mail"];
+    const regx = /[^@]*$/;
+    mailP.textContent = profile_shown["mail"].replace(regx,'').replace("@",'');
     othersProfile.appendChild(mailP);
 
     // Server ID
@@ -610,7 +612,8 @@ function setProfile() {
             document.getElementById("profile_name").innerHTML=name_pseudo;
         }
         if (document.getElementById("profile_mail")!=null){
-            document.getElementById("profile_mail").innerHTML=mail;
+            const regx = /[^@]*$/;
+            document.getElementById("profile_mail").innerHTML=mail.replace(regx,'').replace('@','');
         }
         if (document.getElementById("profile_server")!=null){
             document.getElementById("profile_server").innerHTML="Server "+server_id;
@@ -719,7 +722,9 @@ function setProfileShow() {
     const mailP = document.createElement("p");
     mailP.className = "profile_mail";
     mailP.id = "profile_mail";
-    mailP.textContent = mail;
+    
+    const regx = /[^@]*$/;
+    mailP.textContent = mail.replace(regx,"").replace("@","");
     modifieProfile.appendChild(mailP);
 
     // Friends list
@@ -828,7 +833,8 @@ function setProfileModifie() {
     const mailP = document.createElement("p");
     mailP.className = "profile_mail";
     mailP.id = "profile_mail";
-    mailP.textContent = mail;
+    const regx = /[^@]*$/;
+    mailP.textContent = mail.replace(regx,'').replace('@','');
     modifieProfile.appendChild(mailP);
 
     // Password icon and input
