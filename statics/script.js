@@ -2,7 +2,7 @@ import { FRAMERATE, GameLoop } from './js/GameLoop.js';
 import { WebSocket } from './js/WebSocket.js';
 import { CodiFiePassword } from './js/Password.js';
 
-export const SERVER_ADRESS = 'https://669f-2a02-8428-37af-b01-8f3-4d90-d517-4746.ngrok-free.app';
+export const SERVER_ADRESS = 'https://cff1-2a02-8428-37af-b01-eb63-6b62-ac1f-c837.ngrok-free.app';
 
 var password_state = false;
 var max_server = 8;
