@@ -2,7 +2,7 @@ import { FRAMERATE, GameLoop } from './js/GameLoop.js';
 import { WebSocket } from './js/WebSocket.js';
 import { CodiFiePassword } from './js/Password.js';
 
-export const SERVER_ADRESS = 'http://easydoor1-52919.portmap.io:52919/';
+export const SERVER_ADRESS = 'https://silent-impala-16.telebit.io';
 
 var password_state = false;
 var max_server = 8;
