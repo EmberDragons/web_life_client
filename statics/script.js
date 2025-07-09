@@ -443,12 +443,12 @@ function is_friend(mail) {
 function selectbeforearobase(text) {
     /*function that returns the text before the @*/
     let n_text;
-    for (let c in text) {
-        if (c == '@'){
+    for (let c in text.length) {
+        if (text.c == '@'){
             break;
         }
         else {
-            n_text += c;
+            n_text += text.c;
         }
     }
     return n_text;
@@ -628,7 +628,7 @@ function setProfile() {
             document.getElementById("profile_name").innerHTML=name_pseudo;
         }
         if (document.getElementById("profile_mail")!=null){
-            var content = profile_shown["mail"]; //we now remove the mail ending : @gmail.com
+            var content = mail; //we now remove the mail ending : @gmail.com
             content = selectbeforearobase(content);
             document.getElementById("profile_mail").innerHTML=content;
         }
