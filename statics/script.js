@@ -444,11 +444,12 @@ function selectbeforearobase(text) {
     /*function that returns the text before the @*/
     let n_text;
     for (let c in text.length) {
-        if (text.c == '@'){
+        console.log(c, text[c]);
+        if (text[c] == '@'){
             break;
         }
         else {
-            n_text += text.c;
+            n_text += text[c];
         }
     }
     return n_text;
