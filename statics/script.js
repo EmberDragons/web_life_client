@@ -655,7 +655,8 @@ function setFriendList() {
             virg="";
         }
         if (list[nb].trim() != ""){
-            show_list+=virg+"<button class='friend_name' onclick='see_profile("+'"'+list[nb].trim()+'"'+")'>"+list[nb].trim()+"</button>";
+            var content = selectbeforearobase(list[nb].trim())
+            show_list+=virg+"<button class='friend_name' onclick='see_profile("+'"'+list[nb].trim()+'"'+")'>"+content+"</button>";
         }
     }
     document.getElementById('list_friends').innerHTML = show_list;
