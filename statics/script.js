@@ -183,6 +183,7 @@ window.addEventListener("load", (event) => {
 
 
 window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
     gameLoop.stop();
     if (id_password != undefined) {
         const url = SERVER_ADRESS+'/updateOnlineFalse';
