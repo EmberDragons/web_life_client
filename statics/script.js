@@ -440,6 +440,20 @@ function is_friend(mail) {
     });
 }
 
+function selectbeforearobase(text) {
+    /*function that returns the text before the @*/
+    let n_text;
+    for (let c in text) {
+        if (c == '@'){
+            break;
+        }
+        else {
+            n_text += c;
+        }
+    }
+    return n_text;
+}
+
 function setProfileStranger() {
     document.getElementById("wrapper").style.borderColor = profile_shown["banner_color"];
     document.getElementById('caracter').style.backgroundColor=profile_shown["color"];
@@ -481,7 +495,9 @@ function setProfileStranger() {
     const mailP = document.createElement("p");
     mailP.className = "profile_mail";
     mailP.id = "profile_mail";
-    mailP.textContent = profile_shown["mail"];
+    var content = profile_shown["mail"]; //we now remove the mail ending : @gmail.com
+    content = selectbeforearobase(content);
+    mailP.textContent = content;
     othersProfile.appendChild(mailP);
 
     // Server ID
@@ -533,7 +549,9 @@ function setProfileFriend() {
     const mailP = document.createElement("p");
     mailP.className = "profile_mail";
     mailP.id = "profile_mail";
-    mailP.textContent = profile_shown["mail"];
+    var content = profile_shown["mail"]; //we now remove the mail ending : @gmail.com
+    content = selectbeforearobase(content);
+    mailP.textContent = content;
     othersProfile.appendChild(mailP);
 
     // Server ID
@@ -610,7 +628,9 @@ function setProfile() {
             document.getElementById("profile_name").innerHTML=name_pseudo;
         }
         if (document.getElementById("profile_mail")!=null){
-            document.getElementById("profile_mail").innerHTML=mail;
+            var content = profile_shown["mail"]; //we now remove the mail ending : @gmail.com
+            content = selectbeforearobase(content);
+            document.getElementById("profile_mail").innerHTML=content;
         }
         if (document.getElementById("profile_server")!=null){
             document.getElementById("profile_server").innerHTML="Server "+server_id;
