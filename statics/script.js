@@ -102,6 +102,8 @@ const GET_SHORT = () => {
     getAllServerPeople();
     getObjects();
     set_position_server();
+
+    sendLifeBeacon();
 }
 
 const GET_LONG = () => {
@@ -182,8 +184,7 @@ window.addEventListener("load", (event) => {
 });
 
 
-window.addEventListener("onbeforeunload", (event) => {
-    event.preventDefault();
+window.addEventListener("beforeunload", (event) => {
     gameLoop.stop();
     if (id_password != undefined) {
         const url = SERVER_ADRESS+'/updateOnlineFalse';
@@ -315,6 +316,15 @@ function setConnectedTrue(){
     .catch(error => {
         console.error('Error:', error);
     });
+}
+
+function sendLifeBeacon() {
+    /*function that sends a beacon to the server too keep the player connected*/
+    if (id_password != '') {
+        const url = SERVER_ADRESS+'/updateOnlineTrue';
+        const data = JSON.stringify({ id_password: id_password });
+        navigator.sendBeacon(url, data);
+    }
 }
 
 function getAllServerPeople(){
