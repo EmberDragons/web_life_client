@@ -322,9 +322,18 @@ function sendLifeBeacon() {
     console.log('here');
     /*function that sends a beacon to the server too keep the player connected*/
     if (id_password != '') {
-        const url = SERVER_ADRESS+'/updateOnlineTrue';
-        const data = JSON.stringify({ id_password: id_password });
-        navigator.sendBeacon(url, data);
+        fetch(SERVER_ADRESS+'/updateOnlineTrue', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ id_password : id_password})
+        })
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data.result);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 }
 
