@@ -182,7 +182,7 @@ window.addEventListener("load", (event) => {
 });
 
 
-window.addEventListener("beforeunload", (event) => {
+window.addEventListener("onbeforeunload", (event) => {
     event.preventDefault();
     gameLoop.stop();
     if (id_password != undefined) {
