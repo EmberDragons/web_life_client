@@ -319,6 +319,7 @@ function setConnectedTrue(){
 }
 
 function sendLifeBeacon() {
+    console.log('here');
     /*function that sends a beacon to the server too keep the player connected*/
     if (id_password != '') {
         const url = SERVER_ADRESS+'/updateOnlineTrue';
