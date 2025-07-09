@@ -443,8 +443,7 @@ function is_friend(mail) {
 function selectbeforearobase(text) {
     /*function that returns the text before the @*/
     let n_text;
-    console.log(text, text.length);
-    for (let c in text.length) {
+    for (let c in text) {
         console.log(c, text[c]);
         if (text[c] == '@'){
             break;
